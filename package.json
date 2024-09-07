@@ -19,7 +19,7 @@
     "npm run lint-fix",
     "npm run format-fix"
   ],
-  "*.{scss}": [
+  "*.scss": [
     "npm run format-fix"
   ]
 },
