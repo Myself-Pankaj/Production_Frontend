@@ -15,14 +15,14 @@
         "prepare": "husky"
     },
     "lint-staged": {
-  "*.{js,jsx}": [
-    "npm run lint-fix",
-    "npm run format-fix"
-  ],
-  "*.scss": [
-    "npm run format-fix"
-  ]
-},
+        "*.{js,jsx}": [
+            "npm run lint-fix",
+            "npm run format-fix"
+        ],
+        "*.scss": [
+            "npm run format-fix"
+        ]
+    },
     "dependencies": {
         "react": "^18.3.1",
         "react-dom": "^18.3.1"
