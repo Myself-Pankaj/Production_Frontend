@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+$primary-color: #ff4b2b;
+$secondary-color: #ff416c;
+$white: #ffffff;
+$gray: #333333;
+$light-gray: #eeeef6;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth_container {
+    @include flex-center;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    background-color: $white;
+}
+
+.auth_form_side,
+.auth_welcome_side {
+    width: 50%;
+    height: 100%;
+    padding: 3rem;
+    @include flex-center;
+    flex-direction: column;
+}
+
+.auth_form_side {
+    background-color: $white;
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        color: $gray;
+    }
+
+    .auth_form {
+        width: 100%;
+        max-width: 300px;
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: none;
+            background-color: $light-gray;
+            border-radius: 4px;
+        }
+
+        .auth_role_selector {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+
+            .auth_role_btn {
+                flex: 1;
+                padding: 0.8rem;
+                background-color: $light-gray;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:first-child {
+                    margin-right: 0.5rem;
+                }
+
+                &.active {
+                    background-color: $primary-color;
+                    color: $white;
+                }
+
+                &:hover {
+                    background-color: darken($light-gray, 10%);
+                }
+
+                // Add this new rule
+                &:active,
+                &:focus {
+                    background-color: $primary-color;
+                    color: $white;
+                }
+            }
+        }
+        .auth_forgot_password {
+            color: $gray;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .auth_submit_btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: $buttonTheme;
+            color: $white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: $themeButton;
+            }
+        }
+    }
+}
+
+.auth_welcome_side {
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    color: $white;
+    text-align: center;
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+    }
+
+    .auth_switch_btn {
+        padding: 0.8rem 3rem;
+        background-color: transparent;
+        color: $white;
+        border: 1px solid $white;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: $white;
+            color: $primary-color;
+        }
+    }
+}
+
+//Modal
+/* Styles for the modal overlay */
+.custom-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7); // Semi-transparent background
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; // Ensures modal appears above everything
+
+    .custom-modal-content {
+        background-color: white;
+        padding: 2rem;
+        width: 400px;
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+        text-align: center;
+        animation: fadeIn 0.3s ease; // Smooth fade-in animation
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            &:hover {
+                background-color: #0056b3;
+            }
+        }
+
+        .close-modal-btn {
+            background-color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 0.2rem 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            color: white;
+            font-size: 1rem;
+            &:hover {
+                background-color: darkred;
+            }
+        }
+    }
+}
+
+/* Animation for smooth modal appearance */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@media (max-width: 768px) {
+    .auth_container {
+        flex-direction: column;
+    }
+
+    .auth_form_side,
+    .auth_welcome_side {
+        width: 100%;
+        height: auto;
+    }
+}

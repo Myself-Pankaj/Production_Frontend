@@ -1,0 +1,243 @@
+@import 'variables';
+
+.homeContainer {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    padding: $spacing-large;
+
+    .content {
+        display: flex;
+        width: 100%;
+        max-width: 1200px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+
+        @media (max-width: $breakpoint-large) {
+            flex-direction: column;
+        }
+    }
+
+    .formContainer {
+        flex: 1;
+        padding: $spacing-xlarge;
+
+        .title {
+            font-size: $font-size-xxlarge;
+            color: #fff;
+            margin-bottom: $spacing-large;
+            display: flex;
+            align-items: center;
+            gap: $spacing-small;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .trip-toggle {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-between;
+            padding: 5px;
+            position: relative;
+            margin-bottom: $spacing-large;
+            cursor: pointer;
+
+            span {
+                padding: 10px 20px;
+                z-index: 1;
+                color: rgba(255, 255, 255, 0.7);
+                transition: color 0.3s ease;
+
+                &.active {
+                    color: #2c5364;
+                }
+            }
+
+            .toggle-slider {
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                width: calc(50% - 5px);
+                height: calc(100% - 10px);
+                background-color: #fff;
+                border-radius: 25px;
+                transition: all 0.3s ease;
+            }
+        }
+
+        form {
+            .form-group {
+                position: relative;
+                margin-bottom: $spacing-base;
+
+                .input-icon {
+                    position: absolute;
+                    left: $spacing-small;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: rgba(255, 255, 255, 0.7);
+                    font-size: 1.25em;
+                    pointer-events: none;
+                }
+
+                input,
+                .react-datepicker-wrapper {
+                    width: 100%;
+                }
+
+                input,
+                .react-datepicker__input-container input {
+                    width: 100%;
+                    padding: $spacing-base $spacing-base $spacing-base $spacing-xlarge;
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: $border-radius-base;
+                    font-size: $font-size-base;
+                    color: #fff;
+                    transition: all $transition-speed-fast ease;
+
+                    &::placeholder {
+                        color: rgba(255, 255, 255, 0.5);
+                    }
+
+                    &:focus {
+                        background: rgba(255, 255, 255, 0.2);
+                        border-color: rgba(255, 255, 255, 0.5);
+                        outline: none;
+                        box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+                    }
+                }
+            }
+
+            button {
+                // width: 100%;
+                padding: $spacing-base;
+                background: $buttonTheme;
+                color: #fff;
+                border: none;
+                border-radius: $border-radius-base;
+                font-size: $font-size-large;
+                font-weight: 700;
+                cursor: pointer;
+                transition: all $transition-speed-fast ease;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+
+                &:hover {
+                    background: $themeButton;
+                    transform: translateY(-2px);
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                }
+            }
+        }
+    }
+
+    .SearchCab-button {
+        width: 100%;
+        padding: $spacing-base;
+        background: linear-gradient(45deg, #ff6b6b, #feca57);
+        color: #fff;
+        border: none;
+        border-radius: $border-radius-base;
+        font-size: $font-size-large;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all $transition-speed-fast ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        &:hover {
+            background: linear-gradient(45deg, #feca57, #ff6b6b);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    .textContainer {
+        flex: 1;
+        padding: $spacing-xlarge;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.05);
+
+        h2 {
+            font-size: $font-size-xlarge;
+            margin-bottom: $spacing-base;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: $font-size-large;
+            margin-bottom: $spacing-small;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+    }
+}
+
+// Custom styles for react-datepicker
+.react-datepicker {
+    font-family: $font-primary;
+    background-color: #2c5364;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+.react-datepicker__header {
+    background-color: #203a43;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding-top: 10px;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+    color: #fff;
+    font-weight: bold;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+    color: #fff;
+}
+
+.react-datepicker__day:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range {
+    background-color: #ff6b6b;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.react-datepicker__day--keyboard-selected {
+    background-color: #feca57;
+    border-radius: 50%;
+    color: #2c5364;
+}
+
+.react-datepicker__triangle {
+    display: none;
+}
+
+.react-datepicker-popper {
+    z-index: 1000;
+}

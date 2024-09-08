@@ -1,0 +1,107 @@
+// _variables.scss
+
+// Colors
+$primary-color: #f4c600;
+$secondary-color: #2ecc71;
+$background-color: #f5f7fa;
+$section-background: #ffffff;
+$accent-color: #e74c3c;
+$text-color: #333333;
+$text-muted: #777777;
+$white: #ffffff;
+$accent-color: #e74c3c;
+$section-background: #ffffff;
+$label-color: #7f8c8d;
+$pending-color: #f39c12;
+
+// Font families
+$font-primary: 'Roboto', sans-serif;
+$font-secondary: 'Open Sans', sans-serif;
+
+// Font sizes
+$font-size-base: 16px;
+$font-size-small: 14px;
+$font-size-large: 18px;
+$font-size-xlarge: 24px;
+$font-size-xxlarge: 32px;
+
+// Line heights
+$line-height-base: 1.5;
+$line-height-small: 1.2;
+$line-height-large: 1.8;
+
+// Spacing
+$spacing-small: 8px;
+$spacing-base: 16px;
+$spacing-large: 24px;
+$spacing-xlarge: 32px;
+
+// Border radius
+$border-radius-small: 4px;
+$border-radius-base: 8px;
+$border-radius-large: 12px;
+$border-radius-circle: 50%;
+
+// Box shadows
+$box-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+$box-shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+$box-shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+// Breakpoints
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 992px;
+$breakpoint-xlarge: 1200px;
+
+// Transitions
+$transition-speed-fast: 0.2s;
+$transition-speed-base: 0.3s;
+$transition-speed-slow: 0.5s;
+
+// Z-index levels
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+
+// Grid
+$grid-columns: 12;
+$grid-gutter-width: 30px;
+
+// Container max widths
+$container-max-width-small: 540px;
+$container-max-width-medium: 720px;
+$container-max-width-large: 960px;
+$container-max-width-xlarge: 1140px;
+
+///New Variables
+// Primary colors
+$primary-1: #6c63ff; // Vibrant purple
+$primary-2: #00d9f5; // Bright cyan
+
+// Secondary colors
+$secondary-1: #ff6b6b; // Coral pink
+$secondary-2: #4ecdc4; // Mint green
+
+// Accent color
+$accent: #ffd93d; // Bright yellow
+
+// Neutral shades
+$neutral-dark: #2c2c2c;
+$neutral-mid: #7c7c7c;
+$neutral-light: #f4f4f4;
+
+// Background colors
+$bg-dark: #1a1a2e;
+$bg-light: #ffffff;
+
+$mainColor: #ff006e;
+$colorMain: #feca57;
+
+$buttonTheme: linear-gradient(45deg, $mainColor, $colorMain);
+$themeButton: linear-gradient(45deg, $colorMain, $mainColor);
+
+$green: #2ecc71;
