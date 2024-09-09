@@ -1,0 +1,119 @@
+@import 'variables';
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    &__button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 24px;
+        z-index: 1;
+        border-radius: 50%;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        &--left {
+            left: 10px;
+        }
+
+        &--right {
+            right: 10px;
+        }
+    }
+
+    &__image-container {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        scroll-behavior: smooth;
+        overflow: hidden;
+    }
+
+    &__image {
+        min-width: 100%;
+        transition: opacity 0.5s ease-in-out;
+        border-radius: 10px;
+    }
+}
+
+//Loader
+.loaderContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #1c1c1c 0%, #2a2a2a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.loaderContent {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.luxuryRing {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid transparent;
+
+    &.outerRing {
+        width: 200px;
+        height: 200px;
+        border-top-color: $primary-color;
+        border-bottom-color: $secondary-color;
+    }
+
+    &.middleRing {
+        width: 160px;
+        height: 160px;
+        top: 20px;
+        left: 20px;
+        border-left-color: $accent-color;
+        border-right-color: $primary-color;
+    }
+
+    &.innerRing {
+        width: 120px;
+        height: 120px;
+        top: 40px;
+        left: 40px;
+        border-top-color: $secondary-color;
+        border-bottom-color: $accent-color;
+    }
+}
+
+.carIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    color: $white;
+}
+
+.loadingText {
+    font-family: $font-primary;
+    font-size: $font-size-large;
+    color: $white;
+    margin-top: 40px;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}

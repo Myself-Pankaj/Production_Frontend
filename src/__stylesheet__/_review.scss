@@ -1,0 +1,259 @@
+$primary-color: #e67e22;
+$secondary-color: #34495e;
+$background-color: #f9f9f9;
+$text-color: #333;
+$light-text-color: #666;
+$border-radius: 8px;
+$box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+$transition: all 0.3s ease;
+
+// Mixins
+@mixin card {
+    background-color: #fff;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    transition: $transition;
+}
+
+@mixin section-heading {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: $secondary-color;
+    border-bottom: 2px solid rgba($secondary-color, 0.1);
+    padding-bottom: 10px;
+}
+
+.book_review_main {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    font-family: 'Arial, sans-serif';
+    color: $text-color;
+    background-color: $background-color;
+
+    .book_summary {
+        @include card;
+        padding: 25px;
+        margin-bottom: 30px;
+        background: $buttonTheme;
+        color: #fff;
+
+        .book_heading {
+            font-size: 2em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .book_info {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+    }
+
+    .book_details_container {
+        display: flex;
+        gap: 30px;
+
+        .book_cab_details,
+        .book_payment_details {
+            @include card;
+            padding: 30px;
+        }
+
+        .book_cab_details {
+            flex: 2;
+
+            .book_cab_image_container,
+            .book_driver_info,
+            .book_tour_inclusions,
+            .book_pickup_info,
+            .book_cancellation_policy,
+            .book_additional_info {
+                margin-bottom: 30px;
+
+                .book_section_heading {
+                    @include section-heading;
+                }
+
+                .book_section_content {
+                    font-size: 1.05em;
+                    color: $light-text-color;
+                    line-height: 1.6;
+                }
+
+                .book_cab_model_name {
+                    font-size: 1.3em;
+                    margin-bottom: 15px;
+                    color: $mainColor;
+                    font-weight: 600;
+                }
+
+                .book_info_list {
+                    list-style-type: none;
+                    margin-left: 0;
+                    padding-left: 0;
+
+                    li {
+                        position: relative;
+                        padding-left: 20px;
+                        margin-bottom: 10px;
+
+                        &:before {
+                            content: '•';
+                            position: absolute;
+                            left: 0;
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+
+        .book_payment_details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 25px;
+
+            .book_total_amount {
+                margin-bottom: 20px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .book_section_heading {
+                    font-size: 1.2em;
+                    color: $colorMain;
+                    font-weight: 600;
+                }
+
+                .book_amount_value {
+                    font-size: 1.8em;
+                    color: $green;
+                    font-weight: 700;
+                }
+            }
+
+            .book_payment_options {
+                margin-bottom: 20px;
+
+                .book_payment_option {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 10px;
+
+                    input[type='radio'] {
+                        margin-right: 10px;
+                    }
+
+                    label {
+                        font-size: 1em;
+                        color: $text-color;
+                    }
+                }
+            }
+
+            .book_payment_button {
+                background-color: $green;
+                color: #fff;
+                border: none;
+                padding: 12px;
+                border-radius: $border-radius;
+                font-size: 1.1em;
+                font-weight: 600;
+                cursor: pointer;
+                transition: $transition;
+
+                &:hover {
+                    background-color: darken($primary-color, 10%);
+                }
+            }
+
+            .book_contact_info {
+                margin-top: 20px;
+                font-size: 0.9em;
+                color: $light-text-color;
+                background-color: rgba($secondary-color, 0.05);
+                padding: 12px;
+                border-radius: $border-radius;
+                text-align: center;
+                border: 1px solid rgba($secondary-color, 0.1);
+            }
+        }
+    }
+}
+
+.book_pickup_info {
+    .book_pickup_input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid rgba($secondary-color, 0.2);
+        border-radius: $border-radius;
+        font-size: 1em;
+        transition: $transition;
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+        }
+    }
+}
+
+.book_passenger_info {
+    .book_passenger_inputs {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba($secondary-color, 0.2);
+            border-radius: $border-radius;
+            font-size: 1em;
+            transition: $transition;
+
+            &:focus {
+                outline: none;
+                border-color: $primary-color;
+                box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+            }
+        }
+    }
+
+    .book_add_passenger_btn {
+        background-color: $primary-color;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: $border-radius;
+        font-size: 1em;
+        cursor: pointer;
+        transition: $transition;
+
+        &:hover {
+            background-color: darken($secondary-color, 10%);
+        }
+    }
+}
+
+// Media queries for responsiveness
+@media (max-width: 768px) {
+    .book_review_main {
+        .book_details_container {
+            flex-direction: column;
+
+            .book_cab_details,
+            .book_payment_details {
+                width: 100%;
+            }
+        }
+    }
+}

@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import { logout } from '../../__redux__/slice/authSlice'
 
 const Header = () => {
+    const { user } = useSelector((state) => state.auth)
     const navigate = useNavigate()
     const [isMobileView, setIsMobileView] = React.useState(window.innerWidth <= 768)
     const [isUserMenuOpen, setIsUserMenuOpen] = React.useState(false)
@@ -22,7 +23,7 @@ const Header = () => {
     const toggleUserMenu = () => {
         setIsUserMenuOpen(!isUserMenuOpen)
     }
-    const { user } = useSelector((state) => state.auth)
+
     React.useEffect(() => {
         const handleResize = () => {
             setIsMobileView(window.innerWidth <= 768)
@@ -82,6 +83,7 @@ const Header = () => {
                         <span className="header__logo-text">BariTravels</span>
                     </Link>
                 )}
+
                 <nav className={`header__nav ${isNavMenuOpen ? 'header__nav--open' : ''}`}>
                     {['Home', 'Our Fleet', 'Services', 'Contact'].map((item) => (
                         <Link
@@ -93,6 +95,7 @@ const Header = () => {
                         </Link>
                     ))}
                 </nav>
+
                 <div className="header__user">
                     {user?._id ? (
                         <div className="header__user-menu">

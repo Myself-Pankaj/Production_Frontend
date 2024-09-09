@@ -3,10 +3,16 @@ import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
 const ProtectedHook = ({ children, roles = [] }) => {
-    const { user } = useSelector((state) => state.auth)
+    const { user, isAuthenticated, isLoading } = useSelector((state) => state.auth)
     const location = useLocation()
 
-    if (!user) {
+    // If authentication is still being checked, show a loading indicator
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
+
+    // If not authenticated, redirect to login
+    if (!isAuthenticated) {
         return (
             <Navigate
                 to="/auth"
@@ -15,7 +21,13 @@ const ProtectedHook = ({ children, roles = [] }) => {
             />
         )
     }
+    // console.log(user.role);
+    // If user object is null or undefined, handle the error
+    // if (!user) {
+    //     return <Navigate to="/error" replace />
+    // }
 
+    // Check role if roles are specified
     if (roles.length > 0 && !roles.includes(user.role)) {
         return (
             <Navigate
@@ -30,8 +42,8 @@ const ProtectedHook = ({ children, roles = [] }) => {
 
 // Add prop validation
 ProtectedHook.propTypes = {
-    children: PropTypes.node.isRequired, // Validate children prop
-    roles: PropTypes.arrayOf(PropTypes.string) // Validate roles prop
+    children: PropTypes.node.isRequired,
+    roles: PropTypes.arrayOf(PropTypes.string)
 }
 
 export default ProtectedHook

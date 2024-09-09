@@ -1,0 +1,91 @@
+@import 'variables';
+
+.cabs_page {
+    background-color: $background-color;
+    min-height: 100vh;
+    padding: $spacing-large;
+
+    .cabs_list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: $spacing-large;
+    }
+}
+
+.cabs_card {
+    background-color: $section-background;
+    border-radius: $border-radius-large;
+    overflow: hidden;
+    box-shadow: $box-shadow-medium;
+    transition: all $transition-speed-base ease;
+
+    &:hover {
+        box-shadow: $box-shadow-heavy;
+    }
+
+    .cabs_carousel {
+        display: flex;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .cabs_info {
+        padding: $spacing-large;
+
+        h2 {
+            color: $mainColor;
+            font-size: $font-size-xlarge;
+            margin-bottom: $spacing-small;
+        }
+
+        .cabs_price {
+            font-size: $font-size-large;
+            color: $green;
+            font-weight: bold;
+            margin-bottom: $spacing-base;
+        }
+
+        .cabs_description {
+            color: $text-muted;
+            margin-bottom: $spacing-base;
+        }
+
+        .cabs_features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: $spacing-small;
+            margin-bottom: $spacing-large;
+
+            span {
+                background-color: rgba($mainColor, 0.1);
+                color: $primary-color;
+                padding: $spacing-small $spacing-base;
+                border-radius: $border-radius-small;
+                font-size: $font-size-small;
+                display: flex;
+                align-items: center;
+                gap: $spacing-small;
+            }
+        }
+
+        .cabs_book_button {
+            display: inline-block;
+            background: $buttonTheme;
+            color: $white;
+            padding: $spacing-base $spacing-large;
+            border-radius: $border-radius-base;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color $transition-speed-fast ease;
+
+            &:hover {
+                background-color: darken($secondary-color, 10%);
+            }
+        }
+    }
+}

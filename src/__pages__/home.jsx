@@ -3,6 +3,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { updateFormField } from '../__redux__/slice/infoSlice'
+import { isGoogleMapsLoaded } from '../__scripts__/scriptLoader'
 // import { useDispatch } from "react-redux";
 
 const containerVariants = {
@@ -22,16 +26,53 @@ const itemVariants = {
     visible: { y: 0, opacity: 1 }
 }
 
-const handleSubmit = () => {}
 const Home = () => {
-    // const dispatch = useDispatch();
-
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const formData = useSelector((state) => state.info)
     const [tripType, setTripType] = React.useState('OneWay')
 
     const toggleTripType = () => {
         setTripType(tripType === 'OneWay' ? 'RoundTrip' : 'OneWay')
-        // dispatch(updateFormField({ field: 'cabType', value: tripType === 'OneWay' ? 'RoundTrip' : 'OneWay' }));
+        dispatch(updateFormField({ field: 'cabType', value: tripType === 'OneWay' ? 'RoundTrip' : 'OneWay' }))
     }
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        navigate('/display-cabs')
+    }
+    const handleInputChange = (field) => (event) => {
+        dispatch(updateFormField({ field, value: event.target.value }))
+    }
+    const handleDateChange = (field) => (date) => {
+        const dateString = date ? date.toISOString() : null
+        dispatch(updateFormField({ field, value: dateString }))
+    }
+    const fromInputRef = React.useRef(null)
+    const toInputRef = React.useRef(null)
+
+    React.useEffect(() => {
+        const handlePlaceSelect = (autocomplete, field) => {
+            const place = autocomplete.getPlace()
+            if (place.formatted_address) {
+                dispatch(updateFormField({ field, value: place.formatted_address }))
+            }
+        }
+        const initAutocomplete = () => {
+            if (isGoogleMapsLoaded()) {
+                const fromAutocomplete = new window.google.maps.places.Autocomplete(fromInputRef.current)
+                const toAutocomplete = new window.google.maps.places.Autocomplete(toInputRef.current)
+
+                fromAutocomplete.addListener('place_changed', () => handlePlaceSelect(fromAutocomplete, 'from'))
+                toAutocomplete.addListener('place_changed', () => handlePlaceSelect(toAutocomplete, 'to'))
+            } else {
+                // If Google Maps isn't loaded yet, try again after a short delay
+                setTimeout(initAutocomplete, 100)
+            }
+        }
+
+        initAutocomplete()
+    }, [dispatch])
+
     return (
         <Fragment>
             <motion.main
@@ -65,10 +106,10 @@ const Home = () => {
                                 <FaMapMarkerAlt className="input-icon" />
                                 <input
                                     type="text"
-                                    // ref={fromInputRef}
+                                    ref={fromInputRef}
                                     placeholder="Pick-up Location"
-                                    // value={formData.from}
-                                    // onChange={handleInputChange('from')}
+                                    value={formData.from}
+                                    onChange={handleInputChange('from')}
                                     required
                                 />
                             </motion.div>
@@ -78,10 +119,10 @@ const Home = () => {
                                 <FaMapMarkerAlt className="input-icon" />
                                 <input
                                     type="text"
-                                    // ref={toInputRef}
+                                    ref={toInputRef}
                                     placeholder="Drop-off Location"
-                                    // value={formData.to}
-                                    // onChange={handleInputChange('to')}
+                                    value={formData.to}
+                                    onChange={handleInputChange('to')}
                                     required
                                 />
                             </motion.div>
@@ -90,8 +131,8 @@ const Home = () => {
                                 variants={itemVariants}>
                                 <FaCalendarAlt className="input-icon" />
                                 <DatePicker
-                                    // selected={formData.pickupDate ? new Date(formData.pickupDate) : null}
-                                    // onChange={handleDateChange('pickupDate')}
+                                    selected={formData.pickupDate ? new Date(formData.pickupDate) : null}
+                                    onChange={handleDateChange('pickupDate')}
                                     dateFormat="MMMM d, yyyy"
                                     placeholderText="Pick-Up Date"
                                     required
@@ -112,8 +153,8 @@ const Home = () => {
                                         exit={{ opacity: 0, height: 0 }}>
                                         <FaCalendarAlt className="input-icon" />
                                         <DatePicker
-                                            // selected={formData.dropOffDate ? new Date(formData.dropOffDate) : null}
-                                            // onChange={handleDateChange('dropOffDate')}
+                                            selected={formData.dropOffDate ? new Date(formData.dropOffDate) : null}
+                                            onChange={handleDateChange('dropOffDate')}
                                             dateFormat="MMMM d, yyyy"
                                             placeholderText="Drop-Off Date"
                                             required
@@ -122,7 +163,7 @@ const Home = () => {
                                             popperClassName="custom-popper"
                                             wrapperClassName="custom-wrapper"
                                             showPopperArrow={false}
-                                            // minDate={formData.pickupDate ? new Date(formData.pickupDate) : null}
+                                            minDate={formData.pickupDate ? new Date(formData.pickupDate) : null}
                                         />
                                     </motion.div>
                                 </AnimatePresence>

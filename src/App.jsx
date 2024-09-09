@@ -6,9 +6,12 @@ import Loader from './__components__/loader/loader.jsx'
 import Header from './__components__/header/header.jsx'
 import useFetchUser from './__hooks__/fetchUser.jsx'
 import ProtectedHook from './__hooks__/protectedHook.jsx'
+
 const Home = lazy(() => import('./__pages__/home.jsx'))
 const AuthScreen = lazy(() => import('./__pages__/auth.jsx'))
 const Profile = lazy(() => import('./__pages__/profile.jsx'))
+const DisplayCabs = lazy(() => import('./__pages__/passenger/displayCabs.jsx'))
+const PreviewBooking = lazy(() => import('./__pages__/passenger/previewBooking.jsx'))
 
 function App() {
     const { user, isLoading } = useFetchUser()
@@ -48,6 +51,24 @@ function App() {
                                 <ProtectedHook>
                                     {' '}
                                     <Profile />
+                                </ProtectedHook>
+                            }
+                        />
+                        <Route
+                            path="/display-cabs"
+                            element={
+                                <ProtectedHook>
+                                    {' '}
+                                    <DisplayCabs />
+                                </ProtectedHook>
+                            }
+                        />
+                        <Route
+                            path="/preview-booking/:id"
+                            element={
+                                <ProtectedHook>
+                                    {' '}
+                                    <PreviewBooking />
                                 </ProtectedHook>
                             }
                         />
