@@ -1,0 +1,84 @@
+$primary-color: #6c63ff;
+$secondary-color: #4a47a3;
+$text-color: #333;
+$disabled-color: #ccc;
+$transition-speed: 0.3s;
+
+.p_g_pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    font-family: 'Arial', sans-serif;
+
+    button {
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin: 0 10px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all $transition-speed ease;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+        &:hover:not(:disabled) {
+            background-color: $secondary-color;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        &:disabled {
+            background-color: $disabled-color;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+    }
+
+    span {
+        font-size: 1rem;
+        color: $text-color;
+        margin: 0 15px;
+        font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 15px;
+
+        button {
+            width: 100%;
+            margin: 5px 0;
+        }
+
+        span {
+            order: -1;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+// Cool pulsating effect for the active page
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba($primary-color, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba($primary-color, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba($primary-color, 0);
+    }
+}
+
+.p_g_current-page {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: $primary-color;
+    color: white;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}

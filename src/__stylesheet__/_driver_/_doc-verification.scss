@@ -1,0 +1,251 @@
+@import 'driver-style-variable';
+.driver_document-verification {
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(135deg, $background-color, darken($background-color, 5%));
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 2rem auto;
+    position: relative;
+    overflow: hidden;
+
+    form {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .driver_document-item {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: $primary-color;
+            transition: transform 0.3s ease;
+        }
+    }
+
+    .driver_file-input-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+
+        input[type='file'] {
+            padding: 0.5rem;
+            background-color: white;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+
+            &:focus {
+                outline: none;
+                border-color: $secondary-color;
+                box-shadow: 0 0 0 3px rgba($secondary-color, 0.3);
+            }
+
+            &::file-selector-button {
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+                background-color: $primary-color;
+                color: white;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: darken($primary-color, 10%);
+                }
+            }
+        }
+    }
+
+    .driver_show-document-btn {
+        background-color: $secondary-color;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+
+        &:hover {
+            background-color: darken($secondary-color, 10%);
+            transform: translateY(-2px);
+        }
+    }
+
+    .driver_document-preview {
+        margin-top: 1rem;
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+
+        img,
+        object {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+        }
+    }
+
+    .driver_file-requirements {
+        font-size: 0.9rem;
+        color: $text-color;
+        opacity: 0.7;
+        text-align: center;
+        margin-top: 1rem;
+        font-style: italic;
+    }
+
+    .driver_bank-details-section {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+
+        h3 {
+            font-size: 1.2rem;
+            color: $primary-color;
+            margin-bottom: 1rem;
+        }
+
+        .driver_bank-detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+
+            label {
+                font-weight: 600;
+                color: $text-color;
+            }
+
+            input {
+                padding: 0.5rem;
+                background-color: white;
+                border-radius: 10px;
+                font-size: 0.9rem;
+                border: 2px solid transparent;
+                transition: all 0.3s ease;
+
+                &:focus {
+                    outline: none;
+                    border-color: $secondary-color;
+                    box-shadow: 0 0 0 3px rgba($secondary-color, 0.3);
+                }
+            }
+        }
+    }
+
+    button[type='submit'] {
+        background: linear-gradient(45deg, $primary-color, $secondary-color);
+        color: white;
+        border: none;
+        padding: 1rem;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba($primary-color, 0.3);
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba($primary-color, 0.4);
+        }
+
+        &:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .driver_document-verification {
+        padding: 1.5rem;
+        margin: 1rem;
+
+        form {
+            gap: 1rem;
+        }
+
+        .driver_document-item,
+        .driver_bank-details-section {
+            padding: 1rem;
+
+            label {
+                font-size: 0.9rem;
+            }
+        }
+
+        .driver_file-input-wrapper {
+            input[type='file'] {
+                font-size: 0.8rem;
+            }
+        }
+
+        .driver_show-document-btn {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        button[type='submit'] {
+            padding: 0.8rem;
+            font-size: 1rem;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .driver_document-verification {
+        padding: 1rem;
+
+        form {
+            gap: 0.8rem;
+        }
+
+        .driver_document-item,
+        .driver_bank-details-section {
+            padding: 0.8rem;
+
+            label {
+                font-size: 0.8rem;
+            }
+        }
+
+        .driver_file-input-wrapper {
+            input[type='file'] {
+                font-size: 0.7rem;
+            }
+        }
+
+        .driver_show-document-btn {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
+        }
+
+        button[type='submit'] {
+            padding: 0.7rem;
+            font-size: 0.9rem;
+        }
+    }
+}

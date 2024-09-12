@@ -42,8 +42,33 @@ export const orderAPI = createApi({
                 }
             }),
             invalidatesTags: ['orders']
+        }),
+        myOrder: builder.query({
+            query: () => ({
+                url: 'mybooking',
+                method: 'GET'
+            }),
+            providesTags: ['orders'],
+
+            transformResponse: (response) => {
+                return response.data
+            }
+        }),
+        orderDetail: builder.query({
+            query: (id) => `mybooking/${id}`,
+            providesTags: ['orders'],
+            transformResponse: (response) => {
+                return response.data
+            }
+        }),
+        getPendingOrder: builder.query({
+            query: () => 'pendingOrders',
+            providesTags: ['orders', 'cab', 'user'],
+            transformResponse: (response) => {
+                return response.data
+            }
         })
     })
 })
 
-export const { useBookCabMutation, usePaymentVerificationMutation } = orderAPI
+export const { useBookCabMutation, usePaymentVerificationMutation, useMyOrderQuery, useOrderDetailQuery, useGetPendingOrderQuery } = orderAPI

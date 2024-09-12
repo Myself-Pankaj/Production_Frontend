@@ -31,10 +31,33 @@ export const cabAPI = createApi({
             query: (id) => `getSingleCabs/${id}`,
             providesTags: ['cabs'],
             transformResponse: (response) => {
-                return response.data // Assuming the actual data is in the 'data' property
+                return response.data
             }
+        }),
+        cabRegistration: builder.mutation({
+            query: (cabData) => ({
+                url: 'cab-register',
+                method: 'POST',
+                body: cabData
+            }),
+            invalidatesTags: ['cabs']
+        }),
+        getDriverCab: builder.query({
+            query: () => 'getDriverOwnedCabs',
+            providesTags: ['cabs'],
+            transformResponse: (response) => {
+                return response.data
+            }
+        }),
+        updateCab: builder.mutation({
+            query: ({ id, newData }) => ({
+                url: `updateCab/${id}`,
+                method: 'PUT',
+                body: newData
+            }),
+            invalidatesTags: ['cabs']
         })
     })
 })
 
-export const { useDisplayCabsQuery, useCabDetailQuery } = cabAPI
+export const { useDisplayCabsQuery, useCabDetailQuery, useCabRegistrationMutation, useGetDriverCabQuery, useUpdateCabMutation } = cabAPI

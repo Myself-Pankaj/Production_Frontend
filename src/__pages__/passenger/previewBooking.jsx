@@ -5,9 +5,10 @@ import { toast } from 'react-toastify'
 import { useCabDetailQuery } from '../../__redux__/api/cabApi'
 import { useBookCabMutation, usePaymentVerificationMutation } from '../../__redux__/api/orderApi'
 import Loader from '../../__components__/loader/loader'
-import NoCabFound from '../../__components__/404/noCab'
 import Carousel from '../../__components__/carousel/Carousel'
 import date from '../../__utils__/date'
+import MessageDisplay from '../../__components__/Error/messageDisplay'
+import messages from '../../__constants__/messages'
 
 const PreviewBooking = () => {
     const navigate = useNavigate()
@@ -49,7 +50,12 @@ const PreviewBooking = () => {
         return <Loader />
     }
     if (!cab) {
-        return <NoCabFound />
+        return (
+            <MessageDisplay
+                message={messages.NO_CAB_FOUND}
+                type="error"
+            />
+        )
     }
     const imageGallery = cab.photos || []
     const cabInfo = cab || {}
@@ -60,7 +66,7 @@ const PreviewBooking = () => {
         setIsProcessing(true)
 
         if (!cabInfo._id) {
-            toast.error('Failed to get cab information. Please try again.')
+            toast.error(messages.CAB_FETCHING_FAIL)
             setIsProcessing(false)
             return
         }
@@ -105,9 +111,10 @@ const PreviewBooking = () => {
                             if (verificationResponse.error.success) {
                                 toast.error(verificationResponse.error.data.message)
                             }
+                            // eslint-disable-next-line no-unused-vars
                         } catch (verificationError) {
                             // console.error('Error verifying payment:', verificationError)
-                            toast.error('Failed to verify payment', verificationError)
+                            toast.error(messages.VERIFICATION_FAIL)
                         }
                     },
                     theme: {
@@ -118,15 +125,16 @@ const PreviewBooking = () => {
                 rzp1.open()
             } else if (paymentMethod === 'Cash') {
                 if (data.success) {
-                    toast.success('Order Placed Successfully')
+                    toast.success(messages.ORDER_PLACED_SUCCESS)
                     navigate('/bookings')
                 } else {
-                    toast.error('Failed to place Order')
+                    toast.error(messages.ORDER_PLACED_FAIL)
                 }
             }
+            // eslint-disable-next-line no-unused-vars
         } catch (error) {
             // console.error('Error placing order:', error)
-            toast.error('Failed to place order', error)
+            toast.error(messages.ORDER_PLACED_FAIL)
         } finally {
             setIsProcessing(false)
         }

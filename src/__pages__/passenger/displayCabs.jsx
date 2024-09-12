@@ -5,10 +5,11 @@ import { updateFormField } from '../../__redux__/slice/infoSlice'
 import { extractNumericValue } from '../../__utils__/utils'
 import { motion } from 'framer-motion'
 import Loader from '../../__components__/loader/loader'
-import NoCabFound from '../../__components__/404/noCab'
 import CabCard from '../../__components__/cards/cabCard'
 import { useCalculateDistanceQuery } from '../../__redux__/api/otherApi'
 import { toast } from 'react-toastify'
+import MessageDisplay from '../../__components__/Error/messageDisplay'
+import messages from '../../__constants__/messages'
 
 const DisplayCabs = () => {
     const dispatch = useDispatch()
@@ -17,7 +18,7 @@ const DisplayCabs = () => {
 
     const [errorShown, setErrorShown] = React.useState(false)
 
-    const { data: cabs, isLoading: cabsLoading } = useDisplayCabsQuery()
+    const { data: cabs, isLoading: cabsLoading, error } = useDisplayCabsQuery()
 
     const {
         data: distanceData,
@@ -51,13 +52,24 @@ const DisplayCabs = () => {
         }
     }
     if (cabsLoading) {
-        return <NoCabFound />
+        return <Loader />
+    }
+    if (error) {
+        return (
+            <MessageDisplay
+                message={messages.CAB_FETCHING_FAIL}
+                type="error"
+            />
+        )
     }
     return (
         <main className="cabs_page">
             {!cabs ? (
                 <div className="cabs_loader_container">
-                    <Loader />
+                    <MessageDisplay
+                        message={messages.NO_CAB_FOUND}
+                        type="error"
+                    />
                 </div>
             ) : (
                 <motion.div

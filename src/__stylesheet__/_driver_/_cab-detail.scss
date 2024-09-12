@@ -1,0 +1,169 @@
+// Variables
+// $primary-color: #1a237e;
+$secondary-color: #303f9f;
+$accent-color: #ff4081;
+// $background-color: #f5f5f5;
+$text-color: #212121;
+// $border-radius: 4px;
+$transition-speed: 0.3s;
+// @import 'driver-style-variable';
+
+.c_d_cab_container {
+    max-width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .c_d_cab_header {
+        background-color: $primary-color;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+    }
+
+    .c_d_cab_content {
+        display: flex;
+        flex: 1;
+        padding: 20px;
+        gap: 20px;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+    }
+
+    .c_d_cab_sidebar {
+        flex: 1;
+        background-color: white;
+        border-radius: $border-radius;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        justify-content: center;
+
+        label {
+            font-weight: 500;
+            color: $secondary-color;
+            margin-bottom: 5px;
+        }
+
+        input[type='file'] {
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: $border-radius;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all $transition-speed ease;
+
+            &:hover {
+                transform: scale(1.05);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+
+    .c_d_cab_info {
+        flex: 2;
+        background-color: white;
+        border-radius: $border-radius;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+
+        h2 {
+            color: $secondary-color;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid $accent-color;
+            padding-bottom: 10px;
+        }
+
+        .c_d_cab_edit_btn {
+            background-color: $accent-color;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: $border-radius;
+            cursor: pointer;
+            transition: all $transition-speed ease;
+            float: right;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+
+            &:hover {
+                background-color: darken($accent-color, 10%);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
+
+            &:disabled {
+                background-color: lighten($accent-color, 20%);
+                cursor: not-allowed;
+            }
+        }
+
+        .c_d_cab_info_item {
+            margin-bottom: 20px;
+
+            label {
+                display: block;
+                font-weight: 500;
+                margin-bottom: 5px;
+                color: $secondary-color;
+            }
+
+            input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #e0e0e0;
+                border-radius: $border-radius;
+                font-size: 1rem;
+                transition: all $transition-speed ease;
+
+                &:focus {
+                    outline: none;
+                    border-color: $accent-color;
+                    box-shadow: 0 0 0 2px rgba($accent-color, 0.2);
+                }
+            }
+
+            p {
+                padding: 10px;
+                background-color: #f9f9f9;
+                border-radius: $border-radius;
+                color: $text-color;
+                border-left: 3px solid $secondary-color;
+            }
+        }
+    }
+}
+
+// Add a cool animation for the edit button
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba($accent-color, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 12px rgba($accent-color, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba($accent-color, 0);
+    }
+}
+
+.c_d_cab_edit_btn {
+    animation: pulse 2s infinite;
+}

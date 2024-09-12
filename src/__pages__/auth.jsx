@@ -5,6 +5,7 @@ import { Button } from '@chakra-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'react-toastify'
 import { login, register, verify } from '../__redux__/thunks/authThunk'
+import messages from '../__constants__/messages'
 
 const AuthForm = () => {
     const dispatch = useDispatch()
@@ -42,10 +43,11 @@ const AuthForm = () => {
                     toast.success(resultAction.payload.message)
                     navigate('/user-profile')
                 } else {
-                    toast.error(resultAction.payload || 'Login failed')
+                    toast.error(resultAction.payload || messages.LOGIN_FAILED)
                 }
+                // eslint-disable-next-line no-unused-vars
             } catch (err) {
-                toast.error('An error occurred during login', err)
+                toast.error(messages.LOGIN_FAILED)
             }
         } else {
             try {
@@ -64,7 +66,7 @@ const AuthForm = () => {
                     toast.error(resultAction.payload || 'Login failed')
                 }
             } catch (err) {
-                toast.error('An error occurred during registration', err)
+                toast.error(err.message || 'An error occurred during registration')
             }
         }
     }
@@ -76,7 +78,7 @@ const AuthForm = () => {
                 closeModal()
                 navigate('/')
             } else {
-                toast.error(resultAction.error.message || 'Verification failed')
+                toast.error(resultAction.payload || 'Verification failed')
             }
         } catch (err) {
             toast.error('An error occurred during verification', err)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaBars, FaBookmark, FaSignOutAlt, FaUser } from 'react-icons/fa'
+import { FaBars, FaBookmark, FaCar, FaSignOutAlt, FaUser } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../__assets__/logo.png'
 import userImg from '../../__assets__/userpic.png'
@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLazyLogoutQuery } from '../../__redux__/api/authApi'
 import { toast } from 'react-toastify'
 import { logout } from '../../__redux__/slice/authSlice'
+import messages from '../../__constants__/messages'
 
 const Header = () => {
     const { user } = useSelector((state) => state.auth)
@@ -55,10 +56,11 @@ const Header = () => {
                 navigate('/auth')
                 toast.success(result.data.message)
             } else {
-                toast.error('Unable to Logout')
+                toast.error(messages.LOGOUT_FAILED)
             }
+            // eslint-disable-next-line no-unused-vars
         } catch (error) {
-            toast.error('Error during logout', error)
+            toast.error(messages.LOGOUT_FAILED)
         }
     }
     return (
@@ -121,11 +123,18 @@ const Header = () => {
                                             <FaBookmark /> My Bookings
                                         </Link>
                                     ) : (
-                                        <Link
-                                            to="/mybookings"
-                                            className="header__user-link">
-                                            <FaBookmark /> My Bookings
-                                        </Link>
+                                        <>
+                                            <Link
+                                                to="/mybookings"
+                                                className="header__user-link">
+                                                <FaBookmark /> My Bookings
+                                            </Link>
+                                            <Link
+                                                to="/registeredCabs"
+                                                className="header__user-link">
+                                                <FaCar /> My Cabs
+                                            </Link>
+                                        </>
                                     )}
                                     <button
                                         onClick={onLogout}

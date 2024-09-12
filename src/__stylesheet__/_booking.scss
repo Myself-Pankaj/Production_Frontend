@@ -1,0 +1,596 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+$primary-color: #ff006e;
+$secondary-color: #ffd000;
+$background-color: #f8f9fa;
+$text-color: #333;
+$card-background: #ffffff;
+$accent-color: #8338ec;
+$success-color: #06d6a0;
+$warning-color: #ffd166;
+
+.booking_booking-detail {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, $background-color 0%, #e9ecef 100%);
+    padding: 2rem;
+    color: $text-color;
+
+    &__title {
+        font-size: 2.5rem;
+        color: $primary-color;
+        text-align: center;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, $primary-color, $secondary-color);
+        }
+    }
+
+    section {
+        margin-bottom: 2rem;
+
+        h2 {
+            font-size: 1.8rem;
+            color: $primary-color;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: $accent-color;
+            }
+        }
+    }
+
+    .booking_journey-card,
+    .booking_cab-card,
+    .booking_payment-card,
+    .booking_driver-card,
+    .booking_passenger-card {
+        background: $card-background;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+    }
+
+    .booking_journey-card {
+        &__path {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+        &__info {
+            display: flex;
+            justify-content: space-around;
+        }
+        .booking_journey-point {
+            text-align: center;
+            flex: 1;
+
+            i,
+            svg {
+                font-size: 2rem;
+                color: $primary-color;
+                margin-bottom: 0.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+                color: $secondary-color;
+                margin-bottom: 0.3rem;
+            }
+
+            p {
+                font-size: 1rem;
+                color: $text-color;
+            }
+        }
+
+        .booking_journey-line {
+            flex-grow: 1;
+            height: 3px;
+            background: linear-gradient(to right, $primary-color, $secondary-color);
+            margin: 0 1rem;
+            position: relative;
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: $accent-color;
+                transform: translateY(-50%);
+            }
+
+            &::before {
+                left: 0;
+            }
+            &::after {
+                right: 0;
+            }
+        }
+    }
+
+    .booking_passengers-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+
+    .booking_passenger-card {
+        display: flex;
+        align-items: center;
+
+        &__avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, $primary-color, $secondary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        &__info {
+            h3 {
+                font-size: 1.1rem;
+                color: $primary-color;
+                margin-bottom: 0.2rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+                color: $text-color;
+            }
+        }
+    }
+
+    .booking_cab-card {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        &__info {
+            flex: 1;
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-around;
+            min-width: 250px;
+        }
+    }
+
+    .booking_payment-card {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        .seperate_heading {
+            font-size: 1.3rem;
+            color: $primary-color;
+            margin-bottom: 0.5rem;
+        }
+        > div {
+            text-align: center;
+
+            i,
+            svg {
+                font-size: 2rem;
+                color: $primary-color;
+                margin-bottom: 0.5rem;
+            }
+
+            h3 {
+                font-size: 1rem;
+                color: $text-color;
+                margin-bottom: 0.3rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .booking_driver-card {
+        display: flex;
+        align-items: center;
+
+        &__avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1.5rem;
+        }
+
+        &__info {
+            h3 {
+                font-size: 1.3rem;
+                color: $primary-color;
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+
+    .booking_driver-pending {
+        text-align: center;
+        color: $warning-color;
+
+        i,
+        svg {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1rem;
+            max-width: 80%;
+            margin: 0 auto;
+        }
+    }
+
+    .booking_info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+
+        i,
+        svg {
+            font-size: 1.2rem;
+            color: $accent-color;
+            margin-right: 0.5rem;
+        }
+
+        &__label {
+            font-size: 0.9rem;
+            color: $text-color;
+            margin-right: 0.5rem;
+        }
+
+        &__value {
+            font-size: 1rem;
+            color: $primary-color;
+            font-weight: bold;
+        }
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes heartbeat {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.3);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(1.3);
+    }
+}
+
+.booking_payment-card__status {
+    animation: pulse 3s infinite;
+}
+
+.booking_payment-card__amount {
+    animation-delay: 1.5s;
+}
+
+.booking_payment-card__id {
+    animation-delay: 3s;
+}
+
+.booking_payment-card__method {
+    animation-delay: 4.5s;
+}
+
+@media (max-width: 768px) {
+    .booking_booking-detail {
+        padding: 1rem;
+
+        &__title {
+            font-size: 2rem;
+        }
+
+        .booking_journey-card__path {
+            flex-direction: row;
+        }
+        .booking_journey-card__info {
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .booking_journey-line {
+            height: 50px;
+            width: 3px;
+            margin: 1rem 0;
+        }
+
+        .booking_payment-card,
+        .booking_cab-card {
+            grid-template-columns: 1fr;
+            &__info {
+                flex-direction: column;
+            }
+        }
+
+        .booking_driver-card {
+            flex-direction: column;
+            text-align: center;
+
+            &__avatar {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}
+
+//Order Card
+
+.order_order-card {
+    background-color: $white;
+    border-radius: $border-radius-large;
+    box-shadow: $box-shadow-medium;
+    width: 100%;
+    max-width: 700px;
+    max-height: fit-content;
+    margin: $spacing-large auto;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform $transition-speed-base ease,
+        box-shadow $transition-speed-base ease;
+    animation: fadeInUp $transition-speed-slow ease-out;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: $box-shadow-heavy;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(to right, $primary-color, $secondary-color);
+    }
+
+    .order_order-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: $spacing-large;
+
+        h3 {
+            font-size: $font-size-xlarge;
+            font-weight: 800;
+            color: $text-color;
+            margin: 0;
+        }
+
+        .order_status {
+            padding: $spacing-small $spacing-base;
+            border-radius: $border-radius-circle;
+            font-size: $font-size-small;
+            font-weight: 600;
+            text-transform: uppercase;
+            background-color: $primary-color;
+            color: $white;
+        }
+    }
+
+    .order_order-body {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-large;
+    }
+
+    .order_order-route {
+        display: flex;
+        align-items: center;
+        gap: $spacing-base;
+
+        .order_location {
+            flex: 1;
+            padding: $spacing-small $spacing-base;
+            background-color: rgba($secondary-color, 0.1);
+            border-radius: $border-radius-base;
+            font-weight: 600;
+            color: $secondary-color;
+
+            &.from::before,
+            &.to::before {
+                content: '●';
+                margin-right: $spacing-small;
+            }
+
+            &.from::before {
+                color: $primary-color;
+            }
+
+            &.to::before {
+                color: $secondary-color;
+            }
+        }
+
+        .order_route-line {
+            flex-grow: 0.5;
+            height: 2px;
+            background: linear-gradient(to right, $primary-color, $secondary-color);
+        }
+    }
+
+    .order_order-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .order_order-amount {
+        text-align: right;
+
+        .order_total {
+            font-size: $font-size-large;
+            font-weight: 700;
+            color: $primary-color;
+            text-align: left;
+        }
+
+        .order_paid {
+            font-size: $font-size-base;
+            color: $secondary-color;
+            text-align: left;
+        }
+    }
+
+    .order_detail-button {
+        position: absolute;
+        bottom: $spacing-base;
+        right: $spacing-base;
+        background-color: $secondary-color;
+        color: $white;
+        border: none;
+        padding: $spacing-small $spacing-large;
+        // border-radius: $border-radius-base;
+        font-size: $font-size-base;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+            background-color $transition-speed-fast ease,
+            transform $transition-speed-fast ease;
+
+        &:hover {
+            background-color: darken($secondary-color, 10%);
+            transform: translateY(-2px);
+        }
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: $breakpoint-medium) {
+    .order_order-card {
+        max-width: 100%;
+        margin: $spacing-base 0;
+        // padding: $spacing-base;
+
+        .order_order-route {
+            flex-direction: column;
+            align-items: stretch;
+
+            .order_route-line {
+                width: 2px;
+                height: 20px;
+                margin: $spacing-small auto;
+            }
+        }
+
+        .order-details {
+            flex-direction: column;
+            gap: $spacing-small;
+        }
+
+        .detail-button {
+            position: static;
+            width: 100%;
+            margin-top: $spacing-large;
+        }
+    }
+    .order-card .order-amount .paid {
+        font-size: 16px;
+        color: #2ecc71;
+        text-align: right;
+    }
+    .order-card .order-amount .total {
+        font-size: 18px;
+        font-weight: 700;
+        color: #f4c600;
+        text-align: right;
+    }
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: $spacing-small;
+
+    i {
+        font-size: 18px;
+        color: $primary-color;
+        margin-right: $spacing-small;
+    }
+
+    &__label {
+        font-size: $font-size-small;
+        color: $text-muted;
+        margin-right: $spacing-small;
+    }
+
+    &__value {
+        font-size: $font-size-base;
+        color: $text-color;
+        font-weight: bold;
+    }
+}

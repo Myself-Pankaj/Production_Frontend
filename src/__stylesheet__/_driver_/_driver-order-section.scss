@@ -1,0 +1,75 @@
+@import 'driver-style-variable';
+//order section
+.order_section {
+    &_section-title {
+        font-size: 1.8rem;
+        color: $primary-color;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: 500;
+        letter-spacing: 1px;
+    }
+
+    &_order-section {
+        padding: 20px 0;
+    }
+
+    &_order-carousel {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 20px;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+
+        &::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+    }
+
+    &_order-card {
+        flex: 0 0 auto;
+        width: 280px;
+        margin-right: 20px;
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+
+        &:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    &_order-type {
+        background: #f8f9fa;
+        color: #343a40;
+        padding: 10px 15px;
+        font-weight: 600;
+        font-size: 14px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    &_order-info {
+        padding: 15px;
+    }
+
+    &_info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #495057;
+
+        i {
+            margin-right: 10px;
+            color: #6c757d;
+            width: 16px;
+            text-align: center;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

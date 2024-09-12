@@ -24,7 +24,10 @@ export const authAPI = createApi({
         }),
         meId: builder.query({
             query: (id) => `userById/${id}`,
-            providesTags: ['users']
+            providesTags: ['users'],
+            transformResponse: (response) => {
+                return response.data // Assuming the actual data is in the 'data' property
+            }
         }),
         logout: builder.query({
             query: () => 'logout',

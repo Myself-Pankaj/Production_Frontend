@@ -5,6 +5,9 @@ import { FaCamera, FaPhone, FaUser } from 'react-icons/fa'
 import { AiOutlineMail } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { update } from '../__redux__/thunks/authThunk'
+import messages from '../__constants__/messages'
+import MessageDisplay from '../__components__/Error/messageDisplay'
+import StylishLoader from '../__components__/loader/StylishLoader'
 
 const Profile = () => {
     const dispatch = useDispatch()
@@ -14,8 +17,14 @@ const Profile = () => {
     const [newAvatar, setNewAvatar] = React.useState(null)
     const fileInputRef = React.useRef(null)
 
-    if (loading) return <div>Loading...</div>
-    if (!user) return <div>User not found</div>
+    if (loading)
+        return (
+            <StylishLoader
+                size="small"
+                color="#00d9f5"
+            />
+        )
+    if (!user) return <MessageDisplay message={messages.USER_NOT_FOUND} />
 
     const initialLetter = user?.username ? user?.username.charAt(0).toUpperCase() : '?'
 
@@ -50,7 +59,7 @@ const Profile = () => {
         const isProfileChanged = user.username !== editedProfile.name || user.phoneNumber !== editedProfile.phoneNo || newAvatar
 
         if (!isProfileChanged) {
-            toast.info('Profile Look good as new')
+            toast.info(messages.NO_CHANGES_FOUND_IN_PROFILE)
             setIsEditing(false)
             return
         }
@@ -67,10 +76,11 @@ const Profile = () => {
                 setIsEditing(false)
                 setNewAvatar(null)
             } else {
-                toast.error(resultAction.error.message || 'Failed to update profile')
+                toast.error(resultAction.error.message || messages.PROFILE_UPDATE_FAIL)
             }
+            // eslint-disable-next-line no-unused-vars
         } catch (error) {
-            toast.error(`Failed to update profile: ${error.message}`)
+            toast.error(messages.PROFILE_UPDATE_FAIL)
         }
     }
 

@@ -1,0 +1,189 @@
+@import 'driver-style-variable';
+//Cab Registration Style
+
+.drivercab_cab-registration {
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(135deg, $background-color, darken($background-color, 5%));
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 2rem auto;
+
+    form {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .drivercab_form-group {
+        position: relative;
+        overflow: hidden;
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: $primary-color;
+            transition: transform 0.3s ease;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            font-size: 1rem;
+
+            &:focus {
+                outline: none;
+                border-color: $secondary-color;
+                background-color: white;
+                box-shadow: 0 0 0 3px rgba($secondary-color, 0.3);
+            }
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236c5ce7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.8rem center;
+            background-size: 1.2em;
+        }
+
+        &:hover label {
+            transform: translateY(-5px);
+        }
+    }
+
+    input[type='file'] {
+        padding: 0.5rem;
+        background-color: white;
+        border-radius: 10px;
+        font-size: 0.9rem;
+
+        &::file-selector-button {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            background-color: $primary-color;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: darken($primary-color, 10%);
+            }
+        }
+    }
+
+    button[type='submit'] {
+        background: linear-gradient(45deg, $primary-color, $secondary-color);
+        color: white;
+        border: none;
+        padding: 1rem;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba($primary-color, 0.3);
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba($primary-color, 0.4);
+        }
+
+        &:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.drivercab_cab-registration {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        right: -50%;
+        bottom: -50%;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+        // animation: shimmer 6s infinite;
+        transform: rotate(30deg);
+        z-index: 1;
+        pointer-events: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .drivercab_cab-registration {
+        padding: 1.5rem;
+        margin: 1rem;
+
+        form {
+            gap: 1rem;
+        }
+
+        .drivercab_form-group {
+            label {
+                font-size: 0.9rem;
+            }
+
+            input,
+            select {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        button[type='submit'] {
+            padding: 0.8rem;
+            font-size: 1rem;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .drivercab_cab-registration {
+        padding: 1rem;
+
+        form {
+            gap: 0.8rem;
+        }
+
+        .drivercab_form-group {
+            label {
+                font-size: 0.8rem;
+            }
+
+            input,
+            select {
+                padding: 0.5rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        button[type='submit'] {
+            padding: 0.7rem;
+            font-size: 0.9rem;
+        }
+    }
+}

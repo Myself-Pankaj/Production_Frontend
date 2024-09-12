@@ -21,14 +21,14 @@ const ProtectedHook = ({ children, roles = [] }) => {
             />
         )
     }
-    // console.log(user.role);
+    const role = user?.role || localStorage.getItem('role')
     // If user object is null or undefined, handle the error
     // if (!user) {
     //     return <Navigate to="/error" replace />
     // }
 
     // Check role if roles are specified
-    if (roles.length > 0 && !roles.includes(user.role)) {
+    if (roles.length > 0 && !roles.includes(role)) {
         return (
             <Navigate
                 to="/"

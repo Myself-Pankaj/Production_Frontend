@@ -1,0 +1,64 @@
+@import 'driver-style-variable';
+
+.d_p {
+    &_container {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        padding: 1rem;
+        background-color: #f0f4f8;
+        border-radius: 0.5rem;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    &_loading {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #4a5568;
+    }
+
+    &_card {
+        background-color: #ffffff;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+    }
+
+    &_icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: #4299e1;
+    }
+
+    &_title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+    }
+
+    &_amount {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #38a169;
+    }
+
+    &_type {
+        font-size: 1rem;
+        color: #4a5568;
+    }
+
+    &_earning {
+        background-color: #ebf8ff;
+    }
+
+    &_order-type {
+        background-color: #e6fffa;
+    }
+}
