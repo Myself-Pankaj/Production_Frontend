@@ -4,7 +4,7 @@ import { useGetDriverCabQuery, useUpdateCabMutation } from '../../__redux__/api/
 import StylishLoader from '../../__components__/loader/StylishLoader'
 import MessageDisplay from '../../__components__/Error/messageDisplay'
 import { toast } from 'react-toastify'
-import Carousel from '../../__components__/carousel/Carousel'
+import Carousel from '../../__components__/carousel/carousel.jsx'
 
 const RegisteredCab = () => {
     const { data: driverCabData, isLoading: cabLoading, isError: cabError } = useGetDriverCabQuery()

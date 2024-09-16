@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { FaCar, FaList, FaUserFriends } from 'react-icons/fa'
-import Carousel from '../carousel/Carousel'
+import Carousel from '../carousel/carousel'
 import { InfoItem } from './InfoItem'
 import StylishLoader from '../loader/StylishLoader'
 import MessageDisplay from '../Error/messageDisplay'

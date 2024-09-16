@@ -47,7 +47,7 @@ Payment.propTypes = {
             driverCut: PropTypes.number.isRequired
         }).isRequired,
         paymentMethod: PropTypes.string.isRequired
-    }).isRequired,
-    isLoading: PropTypes.bool.isRequired
+    }),
+    isLoading: PropTypes.bool
 }
 export default Payment

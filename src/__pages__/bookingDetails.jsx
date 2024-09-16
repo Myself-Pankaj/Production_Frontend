@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useOrderDetailQuery } from '../__redux__/api/orderApi'
+import { useOrderDetailForCustomerQuery } from '../__redux__/api/orderApi'
 import { useCabDetailQuery } from '../__redux__/api/cabApi'
 import { useMeIdQuery } from '../__redux__/api/authApi'
 import { JourneySection } from '../__components__/bookingStuff/JourneySection'
@@ -16,7 +16,7 @@ const BookingDetails = () => {
         data: orderDetail,
         isLoading: orderLoading,
         isError: orderError
-    } = useOrderDetailQuery(id, {
+    } = useOrderDetailForCustomerQuery(id, {
         refetchOnReconnect: true
     })
 
@@ -29,6 +29,7 @@ const BookingDetails = () => {
     } = useCabDetailQuery(bookedCabId, {
         skip: !bookedCabId
     })
+
     const driverId = React.useMemo(() => cabData?.belongsTo, [cabData])
 
     const {
@@ -46,6 +47,7 @@ const BookingDetails = () => {
             />
         )
     }
+
     if (cabError) {
         return (
             <MessageDisplay

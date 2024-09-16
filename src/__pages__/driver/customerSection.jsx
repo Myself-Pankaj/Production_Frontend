@@ -84,8 +84,8 @@ const CustomerAvatar = ({ customerData }) =>
 
 // PropTypes for CustomerSection
 CustomerSection.propTypes = {
-    Id: PropTypes.string.isRequired, // Ensure Id is a string and required
-    orderLoading: PropTypes.bool.isRequired // Ensure orderLoading is a boolean and required
+    Id: PropTypes.string, // Ensure Id is a string and required
+    orderLoading: PropTypes.bool // Ensure orderLoading is a boolean and required
 }
 
 // PropTypes for CustomerInfo

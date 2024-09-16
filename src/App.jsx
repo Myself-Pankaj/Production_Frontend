@@ -25,6 +25,19 @@ const DriverCompletedBooking = lazy(() => import('./__pages__/driver/driverCompl
 
 //Admin Routes
 const AdminDashboard = lazy(() => import('./__pages__/admin/adminDashboard.jsx'))
+const AllCabs = lazy(() => import('./__pages__/admin/allCabs.jsx'))
+const AllUser = lazy(() => import('./__pages__/admin/allUser.jsx'))
+const AllDriver = lazy(() => import('./__pages__/admin/allDriver.jsx'))
+const AllOrder = lazy(() => import('./__pages__/admin/allOrder.jsx'))
+const PendingOrder = lazy(() => import('./__pages__/admin/pendingOrder.jsx'))
+const PendingVerification = lazy(() => import('./__pages__/admin/pendingVerification.jsx'))
+const PendingPayment = lazy(() => import('./__pages__/admin/pendingPayment.jsx'))
+const AssignBooking = lazy(() => import('./__pages__/admin/assignBooking.jsx'))
+const CabUpcomingBooking = lazy(() => import('./__pages__/admin/cabUpcomingBooking.jsx'))
+const ManageBooking = lazy(() => import('./__pages__/admin/manageBooking.jsx'))
+const ManageVerification = lazy(() => import('./__pages__/admin/manageVerification.jsx'))
+const AdminCabs = lazy(() => import('./__pages__/admin/adminCabs.jsx'))
+const UpdateAdminCab = lazy(() => import('./__components__/adminStuff/updateAdminCab.jsx'))
 
 function App() {
     const { isLoading } = useFetchUser()
@@ -132,6 +145,114 @@ function App() {
                             element={
                                 <ProtectedHook roles={['Driver', 'Admin']}>
                                     <DriverCompletedBooking />
+                                </ProtectedHook>
+                            }
+                        />
+
+                        {/* //Admin */}
+                        <Route
+                            path="/admin/cabs"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <AllCabs />
+                                </ProtectedHook>
+                            }
+                        />
+                        <Route
+                            path="/admin/cabs/:id"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <CabUpcomingBooking />
+                                </ProtectedHook>
+                            }
+                        />
+                        <Route
+                            path="/admin/customers"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <AllUser />
+                                </ProtectedHook>
+                            }
+                        />
+                        <Route
+                            path="/admin/drivers"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <AllDriver />
+                                </ProtectedHook>
+                            }
+                        />
+                        <Route
+                            path="/admin/transaction"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <AllOrder />
+                                </ProtectedHook>
+                            }
+                        />
+
+                        <Route
+                            path="/admin/booking/pending"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <PendingOrder />
+                                </ProtectedHook>
+                            }
+                        />
+                        <Route
+                            path="/admin/assign/booking"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <AssignBooking />
+                                </ProtectedHook>
+                            }
+                        />
+
+                        <Route
+                            path="/admin/booking/pending/:id"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <ManageBooking />
+                                </ProtectedHook>
+                            }
+                        />
+                        <Route
+                            path="/admin/driver/verification"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <PendingVerification />
+                                </ProtectedHook>
+                            }
+                        />
+                        <Route
+                            path="/admin/driver/verification/:id"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <ManageVerification />
+                                </ProtectedHook>
+                            }
+                        />
+                        <Route
+                            path="/admin/booking/payment"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <PendingPayment />
+                                </ProtectedHook>
+                            }
+                        />
+                        <Route
+                            path="/admin/owned/cabs"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <AdminCabs />
+                                </ProtectedHook>
+                            }
+                        />
+                        <Route
+                            path="/admin/owned/cabs/:id"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <UpdateAdminCab />
                                 </ProtectedHook>
                             }
                         />

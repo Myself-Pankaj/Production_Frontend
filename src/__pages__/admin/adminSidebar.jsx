@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { AiFillFileText } from 'react-icons/ai'
-import { FaChartBar, FaChartLine, FaChartPie } from 'react-icons/fa'
+import { FaBookOpen, FaCarSide, FaChartBar, FaChartLine, FaChartPie } from 'react-icons/fa'
 import { HiMenuAlt4 } from 'react-icons/hi'
 import { IoIosPeople } from 'react-icons/io'
 import { RiDashboardFill, RiShoppingBag3Fill } from 'react-icons/ri'
@@ -68,7 +68,7 @@ const DivOne = ({ location }) => (
         <h5>Dashboard</h5>
         <ul>
             <Li
-                url="/admin/dashboard"
+                url="/"
                 text="Dashboard"
                 Icon={RiDashboardFill}
                 location={location}
@@ -103,24 +103,36 @@ const DivOne = ({ location }) => (
 
 const DivTwo = ({ location }) => (
     <div>
-        <h5>Charts</h5>
+        <h5>Options</h5>
         <ul>
             <Li
-                url="/admin/cabs/Rate"
-                text="Set Rate"
+                url="/admin/booking/pending"
+                text="Pending booking"
                 Icon={FaChartBar}
                 location={location}
             />
             <Li
-                url="/admin/chart/pie"
-                text="Pie"
+                url="/admin/driver/verification"
+                text="Pending verification"
                 Icon={FaChartPie}
                 location={location}
             />
             <Li
-                url="/admin/chart/line"
-                text="Line"
+                url="/admin/booking/payment"
+                text="Pending payment"
                 Icon={FaChartLine}
+                location={location}
+            />
+            <Li
+                url="/admin/assign/booking"
+                text="Assign Booking"
+                Icon={FaBookOpen}
+                location={location}
+            />
+            <Li
+                url="/admin/owned/cabs"
+                text="Display Cabs"
+                Icon={FaCarSide}
                 location={location}
             />
         </ul>

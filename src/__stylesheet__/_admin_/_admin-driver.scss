@@ -1,0 +1,104 @@
+.admin_booking_booking-page {
+    overflow-y: auto;
+}
+
+.admin_driver_manage-drivers {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    overflow-y: auto;
+    .admin_driver_driver-details {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -0.5rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 50px;
+                height: 3px;
+                background-color: #007bff;
+            }
+        }
+
+        .driver-car-info {
+            display: flex;
+            // flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+
+            > div {
+                flex: 1 1 calc(50% - 1rem);
+                min-width: 300px;
+                background-color: #f8f9fa;
+                border-radius: 10px;
+                padding: 1.5rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+
+                &:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+                }
+            }
+        }
+
+        .documents-section,
+        .verify-button-section,
+        .booking-section {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        .documents-section {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .verify-button-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .booking-section {
+            overflow-x: auto;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .admin_driver_manage-drivers {
+        padding: 1rem;
+
+        .admin_driver_driver-details {
+            .driver-car-info {
+                flex-direction: column;
+
+                > div {
+                    flex: 1 1 100%;
+                }
+            }
+        }
+    }
+}

@@ -11,5 +11,17 @@ export default {
     ORDER_PLACED_FAIL: 'Opps ! some error occured while placing your booking',
     USER_NOT_FOUND: 'Not logged In Kindly Log In First',
     DRIVER_NOT_FOUND: 'Unable to fetch user data. Please try again.',
-    INVALID_DOCUMENT: 'Invalid document format. Only JPEG, PNG, and PDF up to 2 MB allowed.'
+    INVALID_DOCUMENT: 'Invalid document format. Only JPEG, PNG, and PDF up to 2 MB allowed.',
+
+    //Admin
+    ERROR_FETCHING_CABS: `Sorry ! we are unable to fetch cab's for you.`,
+    ERROR_FETCHING_DRIVER: `Sorry ! we are unable to fetch driver's for you.`,
+    ERROR_FETCHING_USER: `Sorry ! we are unable to fetch user's for you.`,
+    ERROR_FETCHING_ORDER: `Sorry ! we are unable to fetch booking's for you.`,
+
+    NO_DOC_FOUND: `Sorry ! No document.`,
+    DOCUMENT_CAB_NOT_SUBMITTED: 'Document and cab is not submitted.',
+    NO_PENDING: (entity) => `No Pending ${entity} avaliable`,
+    NO_ORDER_YET: 'No Orders Yet Kindly Place the order first.',
+    NO_DATA_TO_DISPLAY: 'No data to display yet.'
 }

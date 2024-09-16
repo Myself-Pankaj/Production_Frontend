@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { useCabDetailQuery } from '../../__redux__/api/cabApi'
 import { useBookCabMutation, usePaymentVerificationMutation } from '../../__redux__/api/orderApi'
 import Loader from '../../__components__/loader/loader'
-import Carousel from '../../__components__/carousel/Carousel'
+import Carousel from '../../__components__/carousel/carousel.jsx'
 import date from '../../__utils__/date'
 import MessageDisplay from '../../__components__/Error/messageDisplay'
 import messages from '../../__constants__/messages'
@@ -106,14 +106,11 @@ const PreviewBooking = () => {
                             })
                             if (verificationResponse.data.success) {
                                 toast.success(verificationResponse.data.message)
-                                // navigate('/bookings');
+                                navigate('/bookings')
                             }
-                            if (verificationResponse.error.success) {
-                                toast.error(verificationResponse.error.data.message)
-                            }
+
                             // eslint-disable-next-line no-unused-vars
                         } catch (verificationError) {
-                            // console.error('Error verifying payment:', verificationError)
                             toast.error(messages.VERIFICATION_FAIL)
                         }
                     },
@@ -123,14 +120,15 @@ const PreviewBooking = () => {
                 }
                 const rzp1 = new window.Razorpay(options)
                 rzp1.open()
-            } else if (paymentMethod === 'Cash') {
-                if (data.success) {
-                    toast.success(messages.ORDER_PLACED_SUCCESS)
-                    navigate('/bookings')
-                } else {
-                    toast.error(messages.ORDER_PLACED_FAIL)
-                }
             }
+            //     else if (paymentMethod === 'Cash') {
+            //        if (data.success) {
+            //            toast.success(messages.ORDER_PLACED_SUCCESS)
+            //            navigate('/bookings')
+            //        } else {
+            //            toast.error(messages.ORDER_PLACED_FAIL)
+            //        }
+            //    }
             // eslint-disable-next-line no-unused-vars
         } catch (error) {
             // console.error('Error placing order:', error)

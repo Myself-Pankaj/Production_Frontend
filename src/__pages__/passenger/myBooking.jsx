@@ -3,11 +3,12 @@ import { useMyOrderQuery } from '../../__redux__/api/orderApi'
 import OrderCard from '../../__components__/cards/orderCard'
 import StylishLoader from '../../__components__/loader/StylishLoader'
 import MessageDisplay from '../../__components__/Error/messageDisplay'
+import messages from '../../__constants__/messages'
 
 const MyBooking = () => {
-    const { data: Order, isLoading } = useMyOrderQuery()
+    const { data: Order, isLoading, isError } = useMyOrderQuery()
 
-    if (!Order) {
+    if (isError) {
         return (
             <MessageDisplay
                 message="No Order Found"
@@ -16,7 +17,7 @@ const MyBooking = () => {
         )
     }
 
-    if (isLoading) {
+    if (isLoading || !Order) {
         return (
             <StylishLoader
                 size="large"
@@ -26,14 +27,18 @@ const MyBooking = () => {
     }
     return (
         <Fragment>
-            <div className="booking_container">
-                {Order.map((order) => (
-                    <OrderCard
-                        key={order._id}
-                        order={order}
-                    />
-                ))}
-            </div>
+            {Order.length !== 0 ? (
+                <div className="booking_container">
+                    {Order.map((order) => (
+                        <OrderCard
+                            key={order._id}
+                            order={order}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <MessageDisplay message={messages.NO_ORDER_YET} />
+            )}
         </Fragment>
     )
 }

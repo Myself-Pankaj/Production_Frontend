@@ -1,0 +1,100 @@
+@import 'mixin';
+
+@import 'admin-dashboard';
+
+@import 'admin-component';
+
+@import 'admin-driver';
+
+@import 'admin-customer';
+
+@import 'admin-booking';
+
+@import 'admin-cabs';
+
+.red {
+    color: red;
+}
+
+.purple {
+    color: rgb(47, 0, 255);
+}
+
+.green {
+    color: rgb(0, 195, 0);
+}
+
+.admin-container {
+    @include grid(1fr 4fr, 2rem);
+    height: 100vh;
+    background-color: rgb(247, 247, 247);
+
+    > aside {
+        width: 100%;
+        background-color: white;
+        padding: 1rem;
+        z-index: 10;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        > div {
+            margin: 2rem 1rem;
+
+            > h5 {
+                @include heading(2px);
+                opacity: 0.8;
+                margin: 1rem 0;
+            }
+
+            > ul {
+                @include flex(column, unset, unset, 0.5rem);
+                list-style: none;
+
+                > li {
+                    padding: 0.5rem 1rem;
+                    border-radius: 10px;
+
+                    a {
+                        color: rgba(0, 0, 0, 0.825);
+                        @include flex(row, unset);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (width<= 1200px) {
+    .admin-container {
+        overflow: auto;
+    }
+
+    .dashboard {
+        .widget-container,
+        .graph-container,
+        .transaction-container {
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .graph-container {
+            padding: 2rem;
+        }
+        .transaction-container {
+            padding: 2rem;
+            height: unset;
+        }
+    }
+
+    .product-management {
+        padding: 2rem;
+    }
+}
+
+@media screen and (width<= 1100px) {
+    .admin-container {
+        grid-template-columns: 1fr !important;
+    }
+}

@@ -4,6 +4,7 @@ import { useGetPendingOrderQuery } from '../../__redux__/api/orderApi'
 import StylishLoader from '../../__components__/loader/StylishLoader'
 import MessageDisplay from '../../__components__/Error/messageDisplay'
 import date from '../../__utils__/date'
+import messages from '../../__constants__/messages'
 
 const OrderSection = () => {
     const {
@@ -22,13 +23,16 @@ const OrderSection = () => {
             />
         )
     }
-    if (isError || !Order) {
+    if (isError) {
         return (
             <MessageDisplay
                 message="Unable to fetch latest order"
                 type="error"
             />
         )
+    }
+    if (!Order) {
+        return <MessageDisplay message={messages.NO_PENDING('Order')} />
     }
 
     return (

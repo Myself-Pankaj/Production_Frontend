@@ -49,6 +49,14 @@ export const driverAPI = createApi({
             }),
             invalidatesTags: ['users', 'cabs', 'orders']
         }),
+        completeBooking: builder.mutation({
+            query: ({ orderId }) => ({
+                url: 'complete-driver-booking',
+                method: 'PUT',
+                body: { orderId }
+            }),
+            invalidatesTags: ['users', 'cabs', 'orders']
+        }),
         driverCompletedBooking: builder.query({
             query: ({ page, limit }) => ({
                 url: 'getDriverAllBookings',
@@ -63,6 +71,7 @@ export const driverAPI = createApi({
 export const {
     useDocVerificationMutation,
     useDriverBookingsQuery,
+    useCompleteBookingMutation,
     useCancelBookingMutation,
     useConfirmBookingMutation,
     useDriverCompletedBookingQuery

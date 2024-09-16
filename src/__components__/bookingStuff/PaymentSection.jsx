@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { FaCreditCard, FaDollarSign, FaWallet, FaHashtag, FaCheckCircle, FaExclamationTriangle, FaCalculator } from 'react-icons/fa'
+import { FaCreditCard, FaWallet, FaHashtag, FaCheckCircle, FaExclamationTriangle, FaCalculator, FaRupeeSign } from 'react-icons/fa'
 import StylishLoader from '../loader/StylishLoader'
 import MessageDisplay from '../Error/messageDisplay'
 
@@ -32,7 +32,7 @@ export const PaymentSection = ({ order, isLoading }) => {
                     value={order.paymentMethod}
                 />
                 <PaymentInfo
-                    icon={FaDollarSign}
+                    icon={FaRupeeSign}
                     label="Amount Paid"
                     value={`₹ ${order.paidAmount}`}
                     style={{ color: 'green' }}
