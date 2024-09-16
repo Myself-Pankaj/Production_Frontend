@@ -89,7 +89,14 @@ CabCard.propTypes = {
     cab: PropTypes.shape({
         _id: PropTypes.string.isRequired,
         modelName: PropTypes.string.isRequired,
-        photos: PropTypes.arrayOf(PropTypes.string).isRequired,
+        photos: PropTypes.arrayOf(
+            PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.shape({
+                    url: PropTypes.string.isRequired
+                })
+            ])
+        ).isRequired,
         availability: PropTypes.string.isRequired,
         capacity: PropTypes.number.isRequired,
         feature: PropTypes.string.isRequired,

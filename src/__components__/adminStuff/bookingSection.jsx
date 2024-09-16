@@ -70,6 +70,5 @@ BookingList.propTypes = {
             dropOffDate: PropTypes.string.isRequired,
             status: PropTypes.string.isRequired
         })
-    ).isRequired,
-    formatDate: PropTypes.func.isRequired
+    ).isRequired
 }

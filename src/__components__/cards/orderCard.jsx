@@ -9,7 +9,7 @@ const OrderCard = ({ order, driver = false }) => {
         <div className="order_order-card">
             <div className="order_order-header">
                 {driver ? (
-                    <span className={`status ${order.bookingStatus.toLowerCase()}`}>{order.driverShare.status}</span>
+                    <span className={`status ${order.bookingStatus.toLowerCase()}`}>{order?.driverShare?.status}</span>
                 ) : (
                     <span className={`status ${order.bookingStatus.toLowerCase()}`}>{order.bookingStatus}</span>
                 )}
@@ -28,12 +28,12 @@ const OrderCard = ({ order, driver = false }) => {
                 </div>
                 <div className="order_order-amount">
                     {driver ? (
-                        <p className="order_total">Earning: ₹{order.driverShare.driverCut}</p>
+                        <p className="order_total">Earning: ₹{order?.driverShare?.driverCut}</p>
                     ) : (
                         <p className="total">Total: ₹{order.bookingAmount}</p>
                     )}
                     {driver ? (
-                        <p className="order_paid">Paid Via: ₹{order.driverShare.Via}</p>
+                        <p className="order_paid">Paid Via: ₹{order?.driverShare?.Via}</p>
                     ) : (
                         <p className="order_paid">Paid: ₹{order.paidAmount}</p>
                     )}
@@ -64,13 +64,11 @@ OrderCard.propTypes = {
         paymentMethod: PropTypes.string.isRequired,
         bookingAmount: PropTypes.number.isRequired,
         paidAmount: PropTypes.number.isRequired,
-        driverShare: PropTypes.arrayOf(
-            PropTypes.shape({
-                status: PropTypes.string,
-                driverCut: PropTypes.number,
-                Via: PropTypes.string
-            })
-        )
+        driverShare: PropTypes.shape({
+            status: PropTypes.string,
+            driverCut: PropTypes.number,
+            Via: PropTypes.string
+        })
     }).isRequired,
     driver: PropTypes.bool
 }
