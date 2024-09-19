@@ -108,7 +108,7 @@ export const adminAPI = createApi({
         }),
         allPendingPayment: builder.query({
             query: () => ({
-                url: 'allPendingPayment',
+                url: 'PendingPayment',
                 method: 'GET',
                 transformResponse: (response) => {
                     return response.data
@@ -116,6 +116,15 @@ export const adminAPI = createApi({
             }),
 
             providesTags: ['user', 'cabs', 'orders']
+        }),
+        payout: builder.mutation({
+            query: ({ orderId, userId, amount }) => ({
+                url: 'payout',
+                method: 'POST',
+                body: { orderId, userId, amount }
+            }),
+
+            invalidatesTags: ['user', 'cabs', 'orders']
         })
     })
 })
@@ -134,5 +143,6 @@ export const {
     useFetchAllCabsQuery,
     useFetchAllUsersQuery,
     useFetchAllDriversQuery,
-    useFetchAllOrdersQuery
+    useFetchAllOrdersQuery,
+    usePayoutMutation
 } = adminAPI

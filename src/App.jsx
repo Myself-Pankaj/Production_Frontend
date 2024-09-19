@@ -38,6 +38,7 @@ const ManageBooking = lazy(() => import('./__pages__/admin/manageBooking.jsx'))
 const ManageVerification = lazy(() => import('./__pages__/admin/manageVerification.jsx'))
 const AdminCabs = lazy(() => import('./__pages__/admin/adminCabs.jsx'))
 const UpdateAdminCab = lazy(() => import('./__components__/adminStuff/updateAdminCab.jsx'))
+const ManagePayment = lazy(() => import('./__pages__/admin/managePaayment.jsx'))
 
 function App() {
     const { isLoading } = useFetchUser()
@@ -237,6 +238,14 @@ function App() {
                             element={
                                 <ProtectedHook roles={['Admin']}>
                                     <PendingPayment />
+                                </ProtectedHook>
+                            }
+                        />
+                        <Route
+                            path="/admin/booking/payment/managePayment"
+                            element={
+                                <ProtectedHook roles={['Admin']}>
+                                    <ManagePayment />
                                 </ProtectedHook>
                             }
                         />

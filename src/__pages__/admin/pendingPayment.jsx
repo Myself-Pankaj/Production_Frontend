@@ -1,46 +1,62 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
-import { useAllPendingPaymentQuery } from '../../__redux__/api/adminApi'
+import { useAllPendingPaymentQuery, usePayoutMutation } from '../../__redux__/api/adminApi'
 import AdminSidebar from './adminSidebar'
 import StylishLoader from '../../__components__/loader/StylishLoader'
 import MessageDisplay from '../../__components__/Error/messageDisplay'
 import messages from '../../__constants__/messages'
 import TableHOC from '../../__components__/tables/tableHOC'
+import date from '../../__utils__/date'
+import { toast } from 'react-toastify'
 
 const PendingPayment = () => {
-    const { data, isLoading, isError } = useAllPendingPaymentQuery()
-
+    const { data, isLoading, isError, refetch } = useAllPendingPaymentQuery()
     let loading = isLoading || !data
 
     const columns = [
         { key: 'id', title: 'User ID.' },
-        { key: 'username', title: 'Name' },
         { key: 'email', title: 'Email' },
-        { key: 'phoneNo', title: 'Mobile No' },
-        { key: 'isVerifiedDriver', title: 'Driver' },
-        { key: 'isDocumented', title: 'Bank Details' },
-        { key: 'balance', title: 'Amount ₹' },
+
+        { key: 'isPending', title: 'Driver' },
+        { key: 'orderId', title: 'Order ID' },
+        { key: 'completedAt', title: 'Date' },
+        { key: 'amount', title: 'Amount ₹' },
 
         { key: 'manage', title: 'Manage' }
     ]
-    const filterableColumns = ['id', 'username', 'email']
+    const filterableColumns = ['id', 'orderId', 'email']
     const formatData = (data) => {
         if (!data || !data.data) return []
 
         return data.data.map((user) => ({
-            id: user._id,
+            id: user.userId,
             email: user.email || 'N/A',
-            username: user.username || 'N/A',
-            isVerifiedDriver: user.isVerifiedDriver ? 'Yes' : 'No',
-            isDocumented: user.isDocumented ? 'Yes' : 'No',
-            balance: user.wallet.balance || 0,
-            phoneNo: user.phoneNumber || 'XX-XXXX-XXXX',
+            amount: user.transaction.amount,
+            isPending: user.transaction.isPending ? 'Yes' : 'No',
+            orderId: user.transaction.orderId || 'N/A',
+            completedAt: date.formatShortDate(user.transaction.transactionDate) || 'XX-XXXX-XXXX',
 
-            manage: <button onClick={() => handleManage(user._id)}>Manage</button>
+            manage: <button onClick={() => handleManage(user.transaction.orderId, user.userId, user.transaction.amount)}>Manage</button>
         }))
     }
     const formattedData = formatData(data)
-    const handleManage = () => {}
+
+    // eslint-disable-next-line no-unused-vars
+    const [payout, { isLoading: payoutLoading, isError: mutationError }] = usePayoutMutation() //TODO Fix this issue
+    const handleManage = async (orderId, userId, amount) => {
+        const result = await payout({
+            orderId: orderId,
+            userId: userId,
+            amount: amount
+        }).unwrap()
+
+        if (result.success) {
+            toast.success(`Payout is successful Id: ${result.data.id}`)
+        } else {
+            toast.error(result.error)
+        }
+        refetch()
+    }
     return (
         <div className="admin-container">
             <AdminSidebar />

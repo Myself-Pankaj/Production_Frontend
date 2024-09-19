@@ -10,14 +10,14 @@ const CustomTable = ({ columns, data, currentPage, totalPages, onPageChange }) =
         return <MessageDisplay message={messages.NO_DATA_TO_DISPLAY} />
     }
     return (
-        <div className="custom-table-container">
-            <table className="w-full border-collapse">
+        <div className="custom_table_container">
+            <table className="custom_table_">
                 <thead>
-                    <tr className="bg-gray-100">
+                    <tr className="custom_table_">
                         {columns.map((column) => (
                             <th
                                 key={column.key}
-                                className="p-2 text-left border">
+                                className="custom_table_">
                                 {column.title}
                             </th>
                         ))}
@@ -27,11 +27,11 @@ const CustomTable = ({ columns, data, currentPage, totalPages, onPageChange }) =
                     {data.map((row, index) => (
                         <tr
                             key={index}
-                            className="border-b hover:bg-gray-50">
+                            className="custom_table_">
                             {columns.map((column) => (
                                 <td
                                     key={column.key}
-                                    className="p-2 border">
+                                    className="custom_table_">
                                     {row[column.key]}
                                 </td>
                             ))}

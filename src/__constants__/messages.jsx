@@ -24,4 +24,4 @@ export default {
     NO_PENDING: (entity) => `No Pending ${entity} avaliable`,
     NO_ORDER_YET: 'No Orders Yet Kindly Place the order first.',
     NO_DATA_TO_DISPLAY: 'No data to display yet.'
-}
+} //TODO modify me

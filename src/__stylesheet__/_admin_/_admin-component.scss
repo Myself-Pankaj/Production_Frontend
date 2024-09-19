@@ -967,3 +967,112 @@
         }
     }
 }
+.custom_table_container {
+    $primary-color: #3498db;
+    $secondary-color: #2c3e50;
+    $hover-color: #ecf0f1;
+    $border-radius: 8px;
+
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: $border-radius;
+
+    .custom_table_ {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+
+        thead {
+            background-color: $primary-color;
+            color: white;
+
+            th {
+                padding: 1rem;
+                text-align: left;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                border-bottom: 2px solid darken($primary-color, 10%);
+
+                &:first-child {
+                    border-top-left-radius: $border-radius;
+                }
+
+                &:last-child {
+                    border-top-right-radius: $border-radius;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                transition: background-color 0.3s ease;
+
+                &:nth-child(even) {
+                    background-color: rgba($secondary-color, 0.05);
+                }
+
+                &:hover {
+                    background-color: $hover-color;
+                }
+
+                td {
+                    padding: 0.8rem 1rem;
+                    border-bottom: 1px solid rgba($secondary-color, 0.1);
+                }
+
+                &:last-child td {
+                    border-bottom: none;
+
+                    &:first-child {
+                        border-bottom-left-radius: $border-radius;
+                    }
+
+                    &:last-child {
+                        border-bottom-right-radius: $border-radius;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsive adjustments
+@media screen and (max-width: 600px) {
+    .custom_table_container {
+        .custom_table_ {
+            thead {
+                display: none;
+            }
+
+            tbody {
+                tr {
+                    display: block;
+                    margin-bottom: 1rem;
+                    border: 1px solid rgba($secondary-color, 0.1);
+                    border-radius: $border-radius;
+
+                    td {
+                        display: block;
+                        text-align: right;
+                        padding: 0.5rem;
+
+                        &:before {
+                            content: attr(data-label);
+                            float: left;
+                            font-weight: bold;
+                            text-transform: uppercase;
+                        }
+
+                        &:last-child {
+                            border-bottom: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
