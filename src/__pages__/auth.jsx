@@ -5,7 +5,8 @@ import { Button } from '@chakra-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'react-toastify'
 import { login, register, verify } from '../__redux__/thunks/authThunk'
-import messages from '../__constants__/messages'
+// import messages from '../__constants__/messages' //TODO Implent message feature
+import { useForgetPasswordMutation, useResetPasswordMutation } from '../__redux__/api/authApi'
 
 const AuthForm = () => {
     const dispatch = useDispatch()
@@ -19,7 +20,17 @@ const AuthForm = () => {
     const [role, setRole] = React.useState('Passenger')
     const [otp, setOtp] = React.useState('')
 
+    const [validEmail, setValidEmail] = React.useState('')
+    const [isValidEmail, setIsValidEmail] = React.useState(false)
+    const [newPassword, setNewPassword] = React.useState('')
+
+    const [validOtp, setValidOtp] = React.useState('')
+
+    const [forgetPassword, { isLoading: forgetPasswordLoading }] = useForgetPasswordMutation()
+    const [resetPassword, { isLoading: resetPasswordLoading }] = useResetPasswordMutation()
+
     const [isModalOpen, setIsModalOpen] = React.useState(false)
+    const [isForgetPasswordModalOpen, setIsForgetPasswordModalOpen] = React.useState(false)
 
     const openModal = () => {
         setIsModalOpen(true)
@@ -28,9 +39,18 @@ const AuthForm = () => {
     const closeModal = () => {
         setIsModalOpen(false)
     }
+
+    const openForgetPasswordModal = () => {
+        setIsForgetPasswordModalOpen(true)
+    }
+
+    const closeForgetPasswordModal = () => {
+        setIsForgetPasswordModalOpen(false)
+    }
+
     const { loading } = useSelector((state) => state.auth)
 
-    const isLoading = loading
+    const isLoading = loading || forgetPasswordLoading || resetPasswordLoading
 
     const buttonText = loading ? (isLogin ? 'SIGN IN...' : 'SIGN UP...') : isLogin ? 'SIGN IN' : 'SIGN UP'
 
@@ -43,33 +63,29 @@ const AuthForm = () => {
                     toast.success(resultAction.payload.message)
                     navigate('/user-profile')
                 } else {
-                    toast.error(resultAction.payload || messages.LOGIN_FAILED)
+                    toast.error(resultAction.payload || 'Login failed')
                 }
                 // eslint-disable-next-line no-unused-vars
             } catch (err) {
-                toast.error(messages.LOGIN_FAILED)
+                toast.error('Login failed')
             }
         } else {
             try {
-                const newUser = {
-                    username,
-                    email,
-                    password,
-                    role,
-                    phoneNumber
-                }
+                const newUser = { username, email, password, role, phoneNumber }
                 const resultAction = await dispatch(register(newUser))
                 if (register.fulfilled.match(resultAction)) {
                     toast.success(resultAction.payload.message)
                     openModal()
                 } else {
-                    toast.error(resultAction.payload || 'Login failed')
+                    toast.error(resultAction.payload || 'Registration failed')
                 }
+                // eslint-disable-next-line no-unused-vars
             } catch (err) {
-                toast.error(err.message || 'An error occurred during registration')
+                toast.error('Registration error')
             }
         }
     }
+
     const handleOtpSubmit = async () => {
         try {
             const resultAction = await dispatch(verify({ otp }))
@@ -80,8 +96,42 @@ const AuthForm = () => {
             } else {
                 toast.error(resultAction.payload || 'Verification failed')
             }
+            // eslint-disable-next-line no-unused-vars
         } catch (err) {
-            toast.error('An error occurred during verification', err)
+            //TODO fix me
+            toast.error('OTP verification failed')
+        }
+    }
+
+    const handleForgetPassword = async () => {
+        try {
+            const res = await forgetPassword({ email: validEmail })
+
+            if (res.error) {
+                toast.error(res.error.data.message)
+                setIsValidEmail(false)
+            }
+            if (res.data.success) {
+                toast.success(res.data.message)
+                setIsValidEmail(true)
+            }
+        } catch (error) {
+            toast.error('Failed to send OTP', error)
+        }
+    }
+
+    const handleResetPassword = async () => {
+        try {
+            const res = await resetPassword({ otp: validOtp, newPassword })
+            if (res.error) {
+                throw new Error(res.error.data.message)
+            }
+            if (res.data.success) {
+                toast.success(res.data.message)
+                closeForgetPasswordModal()
+            }
+        } catch (error) {
+            toast.error(error)
         }
     }
 
@@ -108,7 +158,6 @@ const AuthForm = () => {
                                         onChange={(e) => setUsername(e.target.value)}
                                         required
                                     />
-
                                     <input
                                         type="tel"
                                         placeholder="Phone Number"
@@ -155,11 +204,12 @@ const AuthForm = () => {
                             required
                         />
                         {isLogin && (
-                            <a
-                                href="#"
+                            <button
+                                type="button"
+                                onClick={openForgetPasswordModal}
                                 className="auth_forgot_password">
                                 Forgot your password?
-                            </a>
+                            </button>
                         )}
                         <Button
                             type="submit"
@@ -173,7 +223,9 @@ const AuthForm = () => {
                 <div className="auth_welcome_side">
                     <h2>{isLogin ? 'Welcome Back!' : 'Hello, Friend!'}</h2>
                     <p>
-                        {isLogin ? `To keep connected with us please login with your credential's` : 'Enter your details and start journey with us'}
+                        {isLogin
+                            ? 'To keep connected with us please login with your credentials'
+                            : 'Enter your details and start your journey with us'}
                     </p>
                     <button
                         onClick={() => setIsLogin(!isLogin)}
@@ -183,7 +235,7 @@ const AuthForm = () => {
                 </div>
             </main>
 
-            {/* Custom Modal */}
+            {/* Custom Modal for OTP Verification */}
             {isModalOpen && (
                 <div className="custom-modal-overlay">
                     <div className="custom-modal-content">
@@ -202,9 +254,64 @@ const AuthForm = () => {
                         <button
                             onClick={handleOtpSubmit}
                             disabled={loading}>
-                            {' '}
                             {loading ? 'Processing...' : 'VERIFY OTP'}
                         </button>
+                    </div>
+                </div>
+            )}
+
+            {/* Forget Password Modal */}
+            {isForgetPasswordModalOpen && (
+                <div className="custom-modal-overlay">
+                    <div className="custom-modal-content">
+                        <h2>Enter Your Email</h2>
+                        <input
+                            type="email"
+                            value={validEmail}
+                            onChange={(e) => setValidEmail(e.target.value)}
+                            placeholder="Enter your email address"
+                            autoFocus
+                        />
+                        {isValidEmail && (
+                            <>
+                                <input
+                                    type="text"
+                                    value={validOtp}
+                                    onChange={(e) => {
+                                        const value = e.target.value.replace(/[^0-9]/g, '')
+                                        if (value.length <= 6) setValidOtp(value)
+                                    }}
+                                    placeholder="Enter OTP"
+                                    maxLength={6}
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="New Password"
+                                    value={newPassword}
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                    required
+                                />
+                            </>
+                        )}
+                        <button
+                            className="close-modal-btn"
+                            onClick={closeForgetPasswordModal}
+                            disabled={isLoading}>
+                            Close
+                        </button>
+                        {isValidEmail ? (
+                            <button
+                                onClick={handleResetPassword}
+                                disabled={isLoading}>
+                                {isLoading ? 'Processing...' : 'RESET PASSWORD'}
+                            </button>
+                        ) : (
+                            <button
+                                onClick={handleForgetPassword}
+                                disabled={isLoading}>
+                                {isLoading ? 'Processing...' : 'GENERATE OTP'}
+                            </button>
+                        )}
                     </div>
                 </div>
             )}

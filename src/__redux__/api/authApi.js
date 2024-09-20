@@ -29,13 +29,30 @@ export const authAPI = createApi({
                 return response.data // Assuming the actual data is in the 'data' property
             }
         }),
+        forgetPassword: builder.mutation({
+            query: (email) => ({
+                url: 'forgetpassword',
+                method: 'POST',
+                body: email
+            }),
+            invalidatesTags: ['users']
+        }),
+        resetPassword: builder.mutation({
+            query: (otp, newPassword) => ({
+                url: 'resetpassword',
+                method: 'PUT',
+                body: otp,
+                newPassword
+            }),
+            invalidatesTags: ['users']
+        }),
         logout: builder.query({
             query: () => 'logout',
-            providesTags: ['users']
+            invalidatesTags: ['users']
         })
     })
 })
 
 // Create async thunks
 
-export const { useMeQuery, useMeIdQuery, useLazyLogoutQuery } = authAPI
+export const { useMeQuery, useMeIdQuery, useLazyLogoutQuery, useForgetPasswordMutation, useResetPasswordMutation } = authAPI

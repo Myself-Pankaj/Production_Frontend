@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 
 import BookingCard from '../../__components__/cards/bookingCard'
 import StylishLoader from '../../__components__/loader/StylishLoader'
+import date from '../../__utils__/date'
 
 const DriverDashboard = () => {
     const { user, loading, error } = useSelector((state) => state.auth)
@@ -57,10 +58,6 @@ const DriverDashboard = () => {
                     <FaWallet className="driver_dashboard_wallet-icon" />
                     <span>Wallet Balance: Rs. {walletBalance}</span>
                 </div>
-                <div className="driver_dashboard_wallet-section">
-                    <FaCashRegister className="driver_dashboard_wallet-icon" />
-                    <span>Total Eraning: Rs. {walletBalance}</span>
-                </div>
             </header>
 
             <main className="driver_dashboard_dashboard-content">
@@ -104,7 +101,7 @@ const DriverDashboard = () => {
                     <h2>
                         <FaExchangeAlt /> Recent Transactions
                     </h2>
-                    <TransactionList />
+                    <TransactionList transactions={transaction} />
                 </section>
             </main>
         </div>
@@ -136,21 +133,22 @@ const CollapsiblePanel = ({ title, isExpanded, onToggle, children }) => {
     )
 }
 
-const TransactionList = () => {
-    const transactions = [
-        { id: 1, date: '2024-09-10', amount: 50, type: 'credit' },
-        { id: 2, date: '2024-09-09', amount: 30, type: 'debit' },
-        { id: 3, date: '2024-09-08', amount: 75, type: 'credit' }
-    ]
+const TransactionList = ({ transactions }) => {
+    // console.log(transactions);
+    // const transactions = [
+    //     { id: 1, date: '2024-09-10', amount: 50, type: 'credit' },
+    //     { id: 2, date: '2024-09-09', amount: 30, type: 'debit' },
+    //     { id: 3, date: '2024-09-08', amount: 75, type: 'credit' }
+    // ]
 
     return (
         <ul className="driver_dashboard_transaction-list">
             {transactions.map((transaction) => (
                 <li
-                    key={transaction.id}
+                    key={transaction.orderId}
                     className={`driver_dashboard_transaction-item ${transaction.type}`}>
-                    <span>{transaction.date}</span>
-                    <span>${transaction.amount}</span>
+                    <span>{date.formatShortDate(transaction.transactionDate)}</span>
+                    <span>Rs. {transaction.amount}</span>
                     <span>{transaction.type}</span>
                 </li>
             ))}
