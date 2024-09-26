@@ -12,7 +12,7 @@ import PropTypes from 'prop-types'
 
 const AdminDashboard = () => {
     const { data: stats, isLoading, isError } = useStatsQuery()
-
+    // console.log(stats.modifiedLatestTransaction)
     let loading = isLoading || !stats
 
     if (isError) {

@@ -134,12 +134,9 @@ const CollapsiblePanel = ({ title, isExpanded, onToggle, children }) => {
 }
 
 const TransactionList = ({ transactions }) => {
-    // console.log(transactions);
-    // const transactions = [
-    //     { id: 1, date: '2024-09-10', amount: 50, type: 'credit' },
-    //     { id: 2, date: '2024-09-09', amount: 30, type: 'debit' },
-    //     { id: 3, date: '2024-09-08', amount: 75, type: 'credit' }
-    // ]
+    if (!transactions) {
+        return <MessageDisplay message="No Transaction Yet !" />
+    }
 
     return (
         <ul className="driver_dashboard_transaction-list">

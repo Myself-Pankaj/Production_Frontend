@@ -91,6 +91,9 @@ $light-gray: #eeeef6;
             font-size: 0.9rem;
             margin-bottom: 1rem;
             display: inline-block;
+            background: none;
+            border: none;
+            cursor: pointer;
         }
 
         .auth_submit_btn {

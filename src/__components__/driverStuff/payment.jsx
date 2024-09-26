@@ -22,7 +22,7 @@ const Payment = ({ order, isLoading }) => {
     }
     const { driverShare, paymentMethod } = order
     const earning = driverShare?.driverCut || 0
-    const paymentBy = paymentMethod !== 'Hybrid' ? 'UnPaid Booking' : 'Paid Booking'
+    const paymentBy = paymentMethod !== 'Hybrid' ? 'Paid By Us' : 'Collect from Customer'
 
     return (
         <div className="d_p_container">

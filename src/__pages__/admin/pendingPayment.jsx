@@ -11,17 +11,15 @@ import { toast } from 'react-toastify'
 
 const PendingPayment = () => {
     const { data, isLoading, isError, refetch } = useAllPendingPaymentQuery()
-    let loading = isLoading || !data
+    let loading = isLoading
 
     const columns = [
         { key: 'id', title: 'User ID.' },
         { key: 'email', title: 'Email' },
-
         { key: 'isPending', title: 'Driver' },
         { key: 'orderId', title: 'Order ID' },
         { key: 'completedAt', title: 'Date' },
         { key: 'amount', title: 'Amount ₹' },
-
         { key: 'manage', title: 'Manage' }
     ]
     const filterableColumns = ['id', 'orderId', 'email']
@@ -57,6 +55,7 @@ const PendingPayment = () => {
         }
         refetch()
     }
+
     return (
         <div className="admin-container">
             <AdminSidebar />
@@ -70,7 +69,7 @@ const PendingPayment = () => {
                     {isError ? (
                         <MessageDisplay
                             message={messages.NO_DATA_TO_DISPLAY}
-                            type="error"
+                            type="info"
                         />
                     ) : (
                         <TableHOC

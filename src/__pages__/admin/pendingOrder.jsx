@@ -59,7 +59,13 @@ const PendingOrder = () => {
             id: booking._id || 'N/A',
             departureDate: date.formatShortDate(booking.departureDate),
 
-            manage: <button onClick={() => handleManage(booking._id)}>Manage</button>
+            manage: (
+                <button
+                    className="table_button"
+                    onClick={() => handleManage(booking._id)}>
+                    Manage
+                </button>
+            )
         }))
     }
     const handleManage = (id) => {

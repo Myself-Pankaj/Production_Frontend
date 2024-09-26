@@ -12,7 +12,6 @@ const PendingVerification = () => {
     const [page, setPage] = React.useState(1)
     const [limit] = React.useState(5)
     const { data: adminDrivers, isLoading: driverLoading, isError } = useFetchAllUnverifiedDriverQuery({ page, limit })
-
     const handlePageChange = (newPage) => {
         if (newPage >= 1 && newPage <= adminDrivers?.pagination?.totalPages) {
             setPage(newPage)
@@ -46,11 +45,10 @@ const PendingVerification = () => {
         navigate(`/admin/driver/verification/${id}`)
     }
     const formattedData = formatData(adminDrivers)
-    const loading = driverLoading || !adminDrivers
     return (
         <div className="admin-container">
             <AdminSidebar />
-            {loading ? (
+            {driverLoading ? (
                 <StylishLoader
                     size="large"
                     color="cyan"
@@ -60,7 +58,7 @@ const PendingVerification = () => {
                     {isError ? (
                         <MessageDisplay
                             message={messages.NO_DATA_TO_DISPLAY}
-                            type="error"
+                            type="info"
                         />
                     ) : (
                         <CustomTable

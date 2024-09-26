@@ -1022,6 +1022,19 @@
                 td {
                     padding: 0.8rem 1rem;
                     border-bottom: 1px solid rgba($secondary-color, 0.1);
+                    > button {
+                        border: none;
+                        cursor: pointer;
+                        border-radius: 5px;
+                        color: $bg-light;
+                        background: $buttonTheme;
+                        padding: 0.4rem;
+                        &:hover {
+                            background: $themeButton;
+                            transform: translateY(-2px);
+                            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                        }
+                    }
                 }
 
                 &:last-child td {

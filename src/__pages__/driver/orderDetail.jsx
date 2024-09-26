@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 // eslint-disable-next-line no-unused-vars
 import React, { Fragment } from 'react'
 import { useParams } from 'react-router-dom'
@@ -46,7 +47,10 @@ const OrderDetail = () => {
                     Id={orderDetail?.userId}
                     isLoading={orderLoading}
                 />
-                <h1>quote some lines</h1>
+                <h2 className="booking_booking-detail-quotes">
+                    After finalizing your booking, you'll receive either immediate payment through our system or a payout processed within 3 business
+                    days, depending on the order type.
+                </h2>
             </div>
         </Fragment>
     )

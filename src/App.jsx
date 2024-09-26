@@ -8,6 +8,7 @@ import Header from './__components__/header/header.jsx'
 import { useFetchUser } from './__hooks__/fetchUser.jsx'
 import ProtectedHook from './__hooks__/protectedHook.jsx'
 import { useSelector } from 'react-redux'
+import Footer from './__components__/footer/footer.jsx'
 
 const Home = lazy(() => import('./__pages__/home.jsx'))
 const AuthScreen = lazy(() => import('./__pages__/auth.jsx'))
@@ -16,6 +17,9 @@ const DisplayCabs = lazy(() => import('./__pages__/passenger/displayCabs.jsx'))
 const PreviewBooking = lazy(() => import('./__pages__/passenger/previewBooking.jsx'))
 const MyBooking = lazy(() => import('./__pages__/passenger/myBooking.jsx'))
 const BookingDetails = lazy(() => import('./__pages__/bookingDetails.jsx'))
+const OurFleet = lazy(() => import('./__pages__/ourFleet.jsx'))
+const Contact = lazy(() => import('./__pages__/contactUs.jsx'))
+const Services = lazy(() => import('./__pages__/services.jsx'))
 
 //Driver Routes
 const DriverDisplay = lazy(() => import('./__pages__/driver/driverDisplay.jsx'))
@@ -81,6 +85,18 @@ function App() {
                                     <AuthScreen />
                                 )
                             }
+                        />
+                        <Route
+                            path="/our-fleet"
+                            element={<OurFleet />}
+                        />
+                        <Route
+                            path="/services"
+                            element={<Services />}
+                        />
+                        <Route
+                            path="/contact"
+                            element={<Contact />}
                         />
                         <Route
                             path="/user-profile"
@@ -267,6 +283,7 @@ function App() {
                         />
                     </Routes>
                 </Suspense>
+                <Footer />
             </Router>
             <ToastContainer
                 position="top-right"

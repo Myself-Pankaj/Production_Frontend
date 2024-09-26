@@ -236,3 +236,100 @@
 }
 
 //pagination
+
+/// Variables
+$footer-bg: #f8f9fa;
+$footer-text: #333;
+$footer-hover: #007bff;
+$footer-height: 50px;
+$footer-padding: 0 1rem;
+$transition-duration: 0.2s;
+
+// Mixins
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+}
+
+// Footer Styles
+.footer {
+    background-color: $footer-bg;
+    color: $footer-text;
+    height: $footer-height;
+    padding: $footer-padding;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+
+    @include flex-center;
+    justify-content: space-between;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    &__content {
+        @include flex-center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    &__copyright {
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+
+    &__links {
+        @include flex-center;
+        gap: 1rem;
+
+        a {
+            color: $footer-text;
+            font-size: 1.1rem;
+            transition: color $transition-duration ease;
+
+            &:hover {
+                color: $footer-hover;
+            }
+        }
+    }
+}
+
+// Media Queries for Responsiveness
+@media (max-width: 600px) {
+    .footer {
+        height: auto;
+        padding: 0.5rem 1rem;
+
+        &__content {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        &__copyright {
+            font-size: 0.8rem;
+        }
+
+        &__links {
+            gap: 0.8rem;
+
+            a {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+// Ensure footer doesn't affect other components
+body {
+    margin-bottom: $footer-height;
+}
+
+@media (max-width: 600px) {
+    body {
+        margin-bottom: 70px;
+    }
+}
