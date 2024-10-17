@@ -34,6 +34,28 @@ const DriverDetails = ({ orderData, driverData, isLoading }) => {
         )
     }
 
+    const dropOffDate = new Date(orderData.dropOffDate) // Convert the string to a Date object
+    const isNotCompleted = dropOffDate < Date.now() && (orderData.bookingStatus === 'Pending' || orderData.bookingStatus === 'Assigning')
+
+    const isCompleted = dropOffDate < Date.now() && orderData.bookingStatus === 'Completed'
+
+    if (isCompleted) {
+        return (
+            <MessageDisplay
+                message="Your booking is completed successfully "
+                type="info"
+            />
+        )
+    }
+
+    if (isNotCompleted) {
+        return (
+            <MessageDisplay
+                message="We are so sorry that we are unable to complete your booking if you have paid the amount it will refunded back to you withing 2 to 3 working day sorry for inconvience"
+                type="info"
+            />
+        )
+    }
     const isPending = orderData.bookingStatus === 'Pending'
 
     return (
@@ -88,7 +110,8 @@ const PendingDriverInfo = () => (
 // PropTypes validation
 DriverDetails.propTypes = {
     orderData: PropTypes.shape({
-        bookingStatus: PropTypes.string.isRequired
+        bookingStatus: PropTypes.string.isRequired,
+        dropOffDate: PropTypes.string.isRequired
     }),
     driverData: PropTypes.shape({
         username: PropTypes.string.isRequired,

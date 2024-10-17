@@ -83,7 +83,7 @@ const PreviewBooking = () => {
             bookingStatus: 'Pending',
             paymentMethod,
             passengers,
-            bookingAmount: bookingData.distance * cabInfo.rate
+            bookingAmount: TotalAmount
         }
 
         try {

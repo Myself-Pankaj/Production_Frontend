@@ -40,7 +40,7 @@ const PendingPayment = () => {
     const formattedData = formatData(data)
 
     // eslint-disable-next-line no-unused-vars
-    const [payout, { isLoading: payoutLoading, isError: mutationError }] = usePayoutMutation() //TODO Fix this issue
+    const [payout, { isLoading: payoutLoading, isError: mutationError, error }] = usePayoutMutation() //TODO Fix this issue
     const handleManage = async (orderId, userId, amount) => {
         const result = await payout({
             orderId: orderId,

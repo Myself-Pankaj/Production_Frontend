@@ -75,7 +75,7 @@ const DriverDashboard = () => {
                                 />
                             ))
                         ) : (
-                            <MessageDisplay message="Kindly wait, we will assign you your first booking soon" />
+                            <MessageDisplay message="Kindly wait, we will assign you your booking soon" />
                         )}
                     </CollapsiblePanel>
 
