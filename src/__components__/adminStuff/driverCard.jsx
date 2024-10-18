@@ -8,7 +8,7 @@ import { FaCar, FaMailBulk, FaPhone, FaUserAlt, FaUserFriends } from 'react-icon
 import { MdConfirmationNumber } from 'react-icons/md'
 import PropTypes from 'prop-types'
 
-const DriverCard = ({ driver, isLoading }) => {
+const DriverCard = ({ driver, isLoading = false }) => {
     if (isLoading) {
         return (
             <StylishLoader
@@ -107,14 +107,10 @@ DriverCard.propTypes = {
             modelName: PropTypes.string,
             cabNumber: PropTypes.string,
             capacity: PropTypes.number,
-            photos: PropTypes.arrayOf(PropTypes.string)
+            photos: PropTypes.arrayOf(PropTypes.object)
         })
     }),
     isLoading: PropTypes.bool
 }
 
-// Set default props
-DriverCard.defaultProps = {
-    isLoading: false
-}
 export default DriverCard

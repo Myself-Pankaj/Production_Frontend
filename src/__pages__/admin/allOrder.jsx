@@ -6,8 +6,10 @@ import date from '../../__utils__/date'
 import AdminSidebar from './adminSidebar'
 import StylishLoader from '../../__components__/loader/StylishLoader'
 import CustomTable from '../../__components__/tables/customTable'
+import { useNavigate } from 'react-router-dom'
 
 const AllOrder = () => {
+    const navigate = useNavigate()
     const [page, setPage] = React.useState(1)
     const [limit] = React.useState(10)
 
@@ -26,7 +28,8 @@ const AllOrder = () => {
         { key: 'bookingStatus', title: 'Booking Status' },
         { key: 'bookingAmount', title: 'Fair' },
         { key: 'departureDate', title: 'Departure' },
-        { key: 'paymentMethod', title: 'Pay Method' }
+        { key: 'paymentMethod', title: 'Pay Method' },
+        { key: 'manage', title: 'Manage' }
     ]
     const formatData = (data) => {
         if (!data || !data.data) return []
@@ -43,8 +46,12 @@ const AllOrder = () => {
             paymentMethod: booking.paymentMethod || 'N/A',
             bookingAmount: Math.round(booking.bookingAmount) || 'N/A',
             id: booking._id || 'N/A',
-            departureDate: date.formatShortDate(booking.departureDate)
+            departureDate: date.formatShortDate(booking.departureDate),
+            manage: <button onClick={() => handleManage(booking._id)}>Manage</button>
         }))
+    }
+    const handleManage = (id) => {
+        navigate(`/admin/booking/pending/${id}`)
     }
     const formattedData = formatData(adminBookings)
     return (

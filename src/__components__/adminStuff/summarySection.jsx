@@ -5,8 +5,9 @@ import date from '../../__utils__/date'
 import StylishLoader from '../loader/StylishLoader'
 import MessageDisplay from '../Error/messageDisplay'
 import PropTypes from 'prop-types'
+import { FaStackpath } from 'react-icons/fa6'
 
-const SummarySection = ({ order, isLoading }) => {
+const SummarySection = ({ order, isLoading = false }) => {
     if (isLoading) {
         return (
             <StylishLoader
@@ -50,6 +51,13 @@ const SummarySection = ({ order, isLoading }) => {
                     <h3>Seats</h3>
                     <p style={{ color: 'red' }}>₹ {order.bookedCab.capacity}</p>
                 </div>
+                <div className="booking_payment-card__amount">
+                    <i className="fas fa-dollar-sign">
+                        <FaStackpath />
+                    </i>
+                    <h3>Status</h3>
+                    <p style={order.bookingStatus === 'completed' ? { color: 'green' } : { color: 'red' }}>{order.bookingStatus}</p>
+                </div>
             </div>
         </section>
     )
@@ -60,16 +68,12 @@ SummarySection.propTypes = {
     order: PropTypes.shape({
         _id: PropTypes.string.isRequired, // Assuming order._id is a string
         createdAt: PropTypes.string.isRequired, // Assuming it's a date string
+        bookingStatus: PropTypes.string.isRequired,
         bookedCab: PropTypes.shape({
             capacity: PropTypes.number.isRequired // Capacity is a number
         }).isRequired // bookedCab is required and must have a capacity
     }).isRequired,
     isLoading: PropTypes.bool // isLoading is optional and can be a boolean
-}
-
-// Set default props if needed
-SummarySection.defaultProps = {
-    isLoading: false
 }
 
 export default SummarySection

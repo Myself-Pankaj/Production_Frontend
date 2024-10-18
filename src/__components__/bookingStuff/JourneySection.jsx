@@ -7,6 +7,7 @@ import StylishLoader from '../loader/StylishLoader'
 
 export const JourneySection = ({ order, isLoading }) => {
     // Check if the data is loading
+    // console.log(order)
     if (isLoading) {
         return <StylishLoader size="large" />
     }
@@ -49,6 +50,11 @@ export const JourneySection = ({ order, isLoading }) => {
                         label="Booking Type"
                         value={order.bookingType}
                     />
+                    {/* <InfoItem
+                        icon={FaTags}
+                        label="Booking Type"
+                        value={order.bookingStatus}
+                    /> */}
                     {order.bookingType !== 'RoundTrip' ? (
                         <InfoItem
                             icon={FaUser}

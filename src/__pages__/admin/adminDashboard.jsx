@@ -9,6 +9,7 @@ import MessageDisplay from '../../__components__/Error/messageDisplay'
 import { FaBalanceScale } from 'react-icons/fa'
 import StylishLoader from '../../__components__/loader/StylishLoader'
 import PropTypes from 'prop-types'
+import { revenueViewer } from '../../__utils__/utils'
 
 const AdminDashboard = () => {
     const { data: stats, isLoading, isError } = useStatsQuery()
@@ -24,6 +25,9 @@ const AdminDashboard = () => {
         )
     }
     const { last6Months: months } = getLastMonths()
+
+    const rev = revenueViewer(Math.round(stats?.count?.revenue))
+
     return (
         <div className="admin-container">
             <AdminSidebar />
@@ -39,7 +43,7 @@ const AdminDashboard = () => {
                         <WidgetItem
                             percent={stats?.changePercent?.revenue}
                             amount={true}
-                            value={Math.round(stats?.count?.revenue)}
+                            value={rev}
                             heading="Revenue"
                             color="rgb(0,115,255)"
                         />

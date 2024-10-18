@@ -5,8 +5,10 @@ import MessageDisplay from '../../__components__/Error/messageDisplay'
 import AdminSidebar from './adminSidebar'
 import StylishLoader from '../../__components__/loader/StylishLoader'
 import CustomTable from '../../__components__/tables/customTable'
+import { useNavigate } from 'react-router-dom'
 
 const AllDriver = () => {
+    const navigate = useNavigate()
     const [page, setPage] = React.useState(1)
     const [limit] = React.useState(10)
 
@@ -24,7 +26,8 @@ const AllDriver = () => {
         { key: 'email', title: 'Email' },
         { key: 'phoneNumber', title: 'Mobile No' },
         { key: 'isDocumentSubmited', title: 'Document' },
-        { key: 'haveCab', title: 'Car' }
+        { key: 'haveCab', title: 'Car' },
+        { key: 'manage', title: 'Manage' }
     ]
 
     const formatData = (data) => {
@@ -36,8 +39,13 @@ const AllDriver = () => {
             phoneNumber: driver.phoneNumber || 'N/A',
             isDocumentSubmited: driver.isDocumentSubmited ? 'Yes' : 'No',
             haveCab: driver.haveCab ? 'Yes' : 'No',
-            email: driver.email || 'N/A'
+            email: driver.email || 'N/A',
+            manage: <button onClick={() => handleManage(driver._id)}>Manage</button>
         }))
+    }
+
+    const handleManage = (id) => {
+        navigate(`/admin/driver/verification/${id}`)
     }
     const formattedData = formatData(adminDrivers)
     return (

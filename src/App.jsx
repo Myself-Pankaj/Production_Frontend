@@ -3,12 +3,13 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { ToastContainer } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
-import Loader from './__components__/loader/loader.jsx'
+
 import Header from './__components__/header/header.jsx'
 import { useFetchUser } from './__hooks__/fetchUser.jsx'
 import ProtectedHook from './__hooks__/protectedHook.jsx'
 import { useSelector } from 'react-redux'
 import Footer from './__components__/footer/footer.jsx'
+import StylishLoader from './__components__/loader/StylishLoader.jsx'
 
 const Home = lazy(() => import('./__pages__/home.jsx'))
 const AuthScreen = lazy(() => import('./__pages__/auth.jsx'))
@@ -58,12 +59,25 @@ function App() {
         }
     }
 
-    if (isLoading) return <Loader />
+    if (isLoading) {
+        return (
+            <StylishLoader
+                size="large"
+                color="black"
+            />
+        )
+    }
     return (
         <>
             <Router>
                 <Header />
-                <Suspense fallback={<Loader />}>
+                <Suspense
+                    fallback={
+                        <StylishLoader
+                            size="large"
+                            color="cyan"
+                        />
+                    }>
                     <Routes>
                         <Route
                             path="/"

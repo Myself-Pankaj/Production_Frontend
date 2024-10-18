@@ -28,7 +28,7 @@ const CabUpcomingBooking = () => {
                     <MessageDisplay message={messages.NO_DATA_TO_DISPLAY} />
                 ) : (
                     <section className="admin_driver_driver-details">
-                        <h1>Driver Details</h1>
+                        {/* <h1>Driver Details</h1> */}
                         <div className="driver-car-info">
                             <CabDetails
                                 cabdata={data}
