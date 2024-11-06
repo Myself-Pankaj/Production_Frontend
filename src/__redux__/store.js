@@ -8,6 +8,7 @@ import { otherAPI } from './api/otherApi'
 import { orderAPI } from './api/orderApi'
 import { driverAPI } from './api/driverApi'
 import { adminAPI } from './api/adminApi'
+import { addAPI } from './api/advertisementApi'
 
 export const store = configureStore({
     reducer: {
@@ -18,7 +19,8 @@ export const store = configureStore({
         [cabAPI.reducerPath]: cabAPI.reducer,
         [driverAPI.reducerPath]: driverAPI.reducer,
         [orderAPI.reducerPath]: orderAPI.reducer,
-        [otherAPI.reducerPath]: otherAPI.reducer
+        [otherAPI.reducerPath]: otherAPI.reducer,
+        [addAPI.reducerPath]: addAPI.reducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
@@ -28,4 +30,5 @@ export const store = configureStore({
             .concat(orderAPI.middleware)
             .concat(driverAPI.middleware)
             .concat(adminAPI.middleware)
+            .concat(addAPI.middleware)
 })

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { updateFormField } from '../__redux__/slice/infoSlice'
 import { isGoogleMapsLoaded } from '../__scripts__/scriptLoader'
-// import { useDispatch } from "react-redux";
+import VedioCarousel from '../__components__/carousel/vedioCarousel'
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -87,7 +87,7 @@ const Home = () => {
                         <motion.h1
                             className="title"
                             variants={itemVariants}>
-                            BariTravels
+                            FUNMUNDO
                         </motion.h1>
                         <motion.div
                             className="trip-toggle"
@@ -181,9 +181,10 @@ const Home = () => {
                     <motion.div
                         className="textContainer"
                         variants={itemVariants}>
-                        <motion.h2 variants={itemVariants}>Your Journey Begins Here</motion.h2>
+                        {/* <motion.h2 variants={itemVariants}>Your Journey Begins Here</motion.h2>
                         <motion.p variants={itemVariants}>Experience comfort and style with every ride.</motion.p>
-                        <motion.p variants={itemVariants}>15% off for returning customers!</motion.p>
+                        <motion.p variants={itemVariants}>15% off for returning customers!</motion.p> */}
+                        <VedioCarousel />
                     </motion.div>
                 </div>
             </motion.main>

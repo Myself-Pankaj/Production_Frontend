@@ -1,32 +1,32 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
-
+import img from '../assets/myimg.png'
 const OurFleet = () => {
     // Example team member data (replace with actual data)
     const team = [
         {
-            name: 'John Doe',
+            name: 'Pankaj Kholiya',
             position: 'Driver Incharge',
             bio: 'Experienced driver with over 10 years of touring experience.',
-            image: '/images/john-doe.jpg' // Replace with actual image paths
+            image: { img }
         },
         {
-            name: 'Jane Smith',
+            name: 'Pankaj Kholiya',
             position: 'Tour Coordinator',
             bio: 'Specializes in organizing personalized and group tours.',
-            image: '/images/jane-smith.jpg'
+            image: { img }
         },
         {
-            name: 'Mike Johnson',
+            name: 'Pankaj Kholiya',
             position: 'Mechanic',
             bio: 'Ensures all vehicles are in top condition for every journey.',
-            image: '/images/mike-johnson.jpg'
+            image: { img }
         },
         {
-            name: 'Sarah Williams',
+            name: 'Pankaj Kholiya',
             position: 'Customer Service Representative',
             bio: 'Your go-to person for any booking queries and support.',
-            image: '/images/sarah-williams.jpg'
+            image: { img }
         }
     ]
 
