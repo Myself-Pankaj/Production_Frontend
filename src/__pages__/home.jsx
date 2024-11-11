@@ -87,7 +87,7 @@ const Home = () => {
                         <motion.h1
                             className="title"
                             variants={itemVariants}>
-                            FUNMUNDO
+                            Velocity Rides
                         </motion.h1>
                         <motion.div
                             className="trip-toggle"
